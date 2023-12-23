@@ -12,7 +12,7 @@ class _SignupState extends State<Signup> {
   String radioButtonItem = 'ONE';
   String department = 'BA.English';
   int id = 1;
-  List<String> dept = ['BA.English', 'BA.Sociology', 'BSc.Computer Science'];
+  List<String> dept = ['BA.English', 'BA.Sociology', 'BSc.Computer Science','BSc.Chemistry','BSc.Psychology','B.Com(Finance)','B.com(CA)','BBA'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
