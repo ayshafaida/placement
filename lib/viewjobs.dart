@@ -1,3 +1,4 @@
+import 'package:final_project/jobdetail.dart';
 import 'package:flutter/material.dart';
 
 class viewjobs extends StatefulWidget {
@@ -11,6 +12,18 @@ class _viewjobsState extends State<viewjobs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text("View Jobs"),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+      ),
       body: Padding(
   padding: const EdgeInsets.all(8.0),
   child: ListView.builder(
@@ -40,7 +53,10 @@ class _viewjobsState extends State<viewjobs> {
                  trailing:IconButton(
                 icon: const Icon(Icons.arrow_forward_ios_rounded),
                 color: Colors.green,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                         context, MaterialPageRoute(builder: (_) => Jobdetails()));
+                },
               ), 
               ),
               Padding(

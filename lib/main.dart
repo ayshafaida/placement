@@ -1,6 +1,5 @@
 import 'package:final_project/homepage.dart';
 import 'package:final_project/signup.dart';
-import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home:Login(),
-      home:viewjobs(),
+      home:Login(),
+      // home:Jobdetails(),
     );
   }
 }

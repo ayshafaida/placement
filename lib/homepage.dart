@@ -1,3 +1,6 @@
+import 'package:final_project/main.dart';
+import 'package:final_project/myprofile.dart';
+import 'package:final_project/placementcell.dart';
 import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 
@@ -43,8 +46,7 @@ class _HomepageState extends State<Homepage> {
               title: const Text('My Profile'),
               //To perform action on tapping at tile
               onTap: () {
-                // Navigator.push(
-                //          context, MaterialPageRoute(builder: (_) => ProfilePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => myprofile()));
               },
             ),
             // divider,
@@ -68,7 +70,7 @@ class _HomepageState extends State<Homepage> {
               leading: const Icon(Icons.contact_page),
               title: const Text('Placement Cell'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => Placement_cell()));
               },
             ),
             // divider,
@@ -92,7 +94,7 @@ class _HomepageState extends State<Homepage> {
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => Login()));
               },
             ),
           ],
