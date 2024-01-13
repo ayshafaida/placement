@@ -151,16 +151,15 @@ class _SignupState extends State<Signup> {
               const SizedBox(
                 height: 10,
               ),
-              const Text('Password'),
+              const Text('Register No.'),
               const SizedBox(
                 height: 5,
               ),
               TextField(
                 // controller: nameController,
-                obscureText: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter your password',
+                  hintText: 'Enter your register no.',
                 ),
               ),
               //some space between name and email

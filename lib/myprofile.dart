@@ -20,8 +20,9 @@ class myprofile extends StatelessWidget {
       //   )
       // ],)
       // )
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: const Color.fromARGB(255, 73, 89, 97),
       body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
         children: [
           Container(
@@ -172,6 +173,6 @@ class myprofile extends StatelessWidget {
           //],
           ),
       //  )
-    );
+     ) );
   }
 }

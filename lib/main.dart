@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home:Login(),
-      // home:Jobdetails(),
+      // home:Placement_cell(),
     );
   }
 }
@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
-                      hintText: 'Enter secure password'),
+                      hintText: 'Create a secure password'),
                       validator: (value) {
                         if(value==null || value.isEmpty) {
                           return 'Enter your password';
