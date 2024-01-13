@@ -24,16 +24,20 @@ class Placement_cell extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Contact',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.green[900],
-                      fontWeight: FontWeight.w500,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Contact',
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.green[900],
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(
