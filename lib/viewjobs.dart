@@ -59,14 +59,22 @@ class _viewjobsState extends State<viewjobs> {
                 },
               ), 
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Text("Location",textAlign:TextAlign.start,),
+              Row(
+                children:[ IconButton(onPressed: ()=>{}, icon: Icon(Icons.location_pin)),
+                  
+                  Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text("Location",textAlign:TextAlign.start,),
+                ),]
+
               ),
               SizedBox(height: 6,),
+              Row(
+                children: [IconButton(onPressed: ()=>{}, icon: Icon(Icons.business_center_rounded)),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Text("Experience",textAlign:TextAlign.start,),
+              ),]
               ),
               SizedBox(height: 6,),
             ],

@@ -1,3 +1,4 @@
+import 'package:final_project/editprofile.dart';
 import 'package:flutter/material.dart';
 
 class myprofile extends StatelessWidget {
@@ -20,7 +21,7 @@ class myprofile extends StatelessWidget {
       //   )
       // ],)
       // )
-      backgroundColor: const Color.fromARGB(255, 73, 89, 97),
+      backgroundColor: Color.fromARGB(255, 26, 110, 54),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -53,7 +54,7 @@ class myprofile extends StatelessWidget {
             height: 60,
           ),
           Text(
-            "Thahsin",
+            "Name",
             style: TextStyle(
                 fontSize: 25.0,
                 color: Colors.white,
@@ -69,7 +70,7 @@ class myprofile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12,),
                 child: 
                 Text(
-                  "bfavscs456",
+                  "Mobile No.",
                   style: TextStyle(
                       letterSpacing: 2.0, fontWeight: FontWeight.w300),
                 ),
@@ -85,7 +86,7 @@ class myprofile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12,),
                 child: 
                 Text(
-                  "BSC CS",
+                  "Address",
                   style: TextStyle(
                       letterSpacing: 2.0, fontWeight: FontWeight.w300),
                 ),
@@ -101,7 +102,7 @@ class myprofile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12,),
                 child: 
                 Text(
-                  "6th sem",
+                  "Gender",
                   style: TextStyle(
                       letterSpacing: 2.0, fontWeight: FontWeight.w300),
                 ),
@@ -117,7 +118,7 @@ class myprofile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12,),
                 child: 
                 Text(
-                  "Gender",
+                  "Department",
                   style: TextStyle(
                       letterSpacing: 2.0, fontWeight: FontWeight.w300),
                 ),
@@ -133,7 +134,7 @@ class myprofile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12,),
                 child: 
                 Text(
-                  "Tirur",
+                  "E-mail",
                   style: TextStyle(
                       letterSpacing: 2.0, fontWeight: FontWeight.w300),
                 ),
@@ -149,7 +150,7 @@ class myprofile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12,),
                 child: 
                 Text(
-                  "1234567845",
+                  "Reg. No.",
                   style: TextStyle(
                       letterSpacing: 2.0, fontWeight: FontWeight.w300),
                 ),
@@ -160,13 +161,13 @@ class myprofile extends StatelessWidget {
           SizedBox(height: 30),
           InkWell(
             onTap: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (_) => Editprofile()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => EditProfile()));
               // Navigate to update page or show a dialog for updating information
               // For simplicity, let's print a message for now
               print('Update button pressed');
             },
-            child: Text('Update Profile'),
+            child: Text('Edit Profile'),
          ),
         ],
       )
