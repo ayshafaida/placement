@@ -1,7 +1,7 @@
+import 'package:final_project/appliedjobs.dart';
 import 'package:final_project/main.dart';
 import 'package:final_project/myprofile.dart';
 import 'package:final_project/placementcell.dart';
-import 'package:final_project/reject.dart';
 import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 
@@ -62,11 +62,11 @@ class _HomepageState extends State<Homepage> {
             // divider,
             ListTile(
               leading: const Icon(Icons.assignment_outlined),
-              title: const Text('Applied Job'),
+              title: const Text('Apply Job Details'),
               onTap: () {
                 //Navigator.push(context,MaterialPageRoute(builder: (_) => Applied()));
                // Navigator.push(context, MaterialPageRoute(builder: (_) => acceptedState()));
-              Navigator.push(context, MaterialPageRoute(builder: (_) => rejecState() ));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => ApplyDetails() ));
               },
             ),
             // divider,

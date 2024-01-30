@@ -11,18 +11,18 @@ class rejecStateState extends State<rejecState> {
   @override
   Widget build(BuildContext context) {
      return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text("Rejected Jobs"),
-        backgroundColor: Colors.purple[200],
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: Icon(
+      //       Icons.arrow_back_ios,
+      //     ),
+      //     onPressed: () => Navigator.pop(context),
+      //   ),
+      //   title: Text("Rejected Jobs"),
+      //   backgroundColor: Colors.purple[200],
+      //   centerTitle: true,
+      // ),
       body: Padding(
   padding: const EdgeInsets.all(8.0),
   child: ListView.builder(
