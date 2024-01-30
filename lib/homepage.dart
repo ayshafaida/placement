@@ -18,7 +18,7 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Drawer Widget"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.purple[200],
       ),
       //Empty body with a empty container
       body: Container(),
@@ -31,7 +31,7 @@ class _HomepageState extends State<Homepage> {
             //Drawer header for Heading part of drawer
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.purple,
               ),
               //Title of header
        child: Center(
@@ -65,8 +65,8 @@ class _HomepageState extends State<Homepage> {
               title: const Text('Applied Job'),
               onTap: () {
                 //Navigator.push(context,MaterialPageRoute(builder: (_) => Applied()));
-                Navigator.push(context, MaterialPageRoute(builder: (_) => acceptedState()));
-              // Navigator.push(context, MaterialPageRoute(builder: (_) => rejecState() ));
+               // Navigator.push(context, MaterialPageRoute(builder: (_) => acceptedState()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => rejecState() ));
               },
             ),
             // divider,

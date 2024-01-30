@@ -8,7 +8,7 @@ class myprofile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.purple[200],
           title: Center(
             child: const Text('My Profile'),
           ),
@@ -21,7 +21,7 @@ class myprofile extends StatelessWidget {
       //   )
       // ],)
       // )
-      backgroundColor: Color.fromARGB(255, 26, 110, 54),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -57,13 +57,13 @@ class myprofile extends StatelessWidget {
             "Name",
             style: TextStyle(
                 fontSize: 25.0,
-                color: Colors.white,
+                color: Colors.purple[200],
                 letterSpacing: 2.0,
                 fontWeight: FontWeight.w400),
           ),
          SizedBox(height: 20),
           Container(
-            color:Colors.white,
+            color:Colors.purple[100],
             width: MediaQuery.of(context).size.width/2,
             child: Center(
               child: Padding(
@@ -79,7 +79,7 @@ class myprofile extends StatelessWidget {
           ),
            SizedBox(height: 15),
           Container(
-            color: Colors.white,
+            color: Colors.purple[100],
             width: MediaQuery.of(context).size.width/2,
             child: Center(
               child: Padding(
@@ -95,7 +95,7 @@ class myprofile extends StatelessWidget {
           ),
            SizedBox(height: 15),
           Container(
-            color: Colors.white,
+            color: Colors.purple[100],
             width: MediaQuery.of(context).size.width/2,
             child: Center(
               child: Padding(
@@ -111,7 +111,7 @@ class myprofile extends StatelessWidget {
           ), 
           SizedBox(height: 15), 
           Container(
-            color: Colors.white,
+            color: Colors.purple[100],
             width: MediaQuery.of(context).size.width/2,
             child: Center(
               child: Padding(
@@ -127,7 +127,7 @@ class myprofile extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Container(
-            color: Colors.white,
+            color: Colors.purple[100],
             width: MediaQuery.of(context).size.width/2,
             child: Center(
               child: Padding(
@@ -143,7 +143,7 @@ class myprofile extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Container(
-            color: Colors.white,
+            color: Colors.purple[100],
             width: MediaQuery.of(context).size.width/2,
             child: Center(
               child: Padding(

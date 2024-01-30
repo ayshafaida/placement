@@ -20,7 +20,7 @@ class __acceptedStateState extends State<acceptedState> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text("Accepted Jobs"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.purple[200],
         centerTitle: true,
       ),
       body: Padding(
@@ -33,7 +33,7 @@ class __acceptedStateState extends State<acceptedState> {
         child: Card(
           elevation: 9,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -49,14 +49,14 @@ class __acceptedStateState extends State<acceptedState> {
                   "Company Name",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-                 trailing:IconButton(
-                icon:  Icon(Icons.arrow_forward_ios_rounded),
-                color: Colors.green,
-                onPressed: () {
-                 // Navigator.push(
-                        // context, MaterialPageRoute(builder: (_) => Jobdetails()));
-                },
-              ), 
+              //    trailing:IconButton(
+              //   icon:  Icon(Icons.arrow_forward_ios_rounded),
+              //   color: Colors.green,
+              //   onPressed: () {
+              //    // Navigator.push(
+              //           // context, MaterialPageRoute(builder: (_) => Jobdetails()));
+              //   },
+              // ), 
               ),
               Row(
                 children:[ IconButton(onPressed: ()=>{}, icon: Icon(Icons.location_pin)),

@@ -20,7 +20,7 @@ class rejecStateState extends State<rejecState> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text("Rejected Jobs"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.purple[200],
         centerTitle: true,
       ),
       body: Padding(
@@ -35,7 +35,7 @@ class rejecStateState extends State<rejecState> {
             Card(
               elevation: 9,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -51,14 +51,14 @@ class rejecStateState extends State<rejecState> {
                       "Company Name",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                     trailing:IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios_rounded),
-                    color: Colors.green,
-                    onPressed: () {
-                     // Navigator.push(
-                            // context, MaterialPageRoute(builder: (_) => Jobdetails()));
-                    },
-                  ), 
+                  //    trailing:IconButton(
+                  //   icon: const Icon(Icons.arrow_forward_ios_rounded),
+                  //   color: Colors.green,
+                  //   onPressed: () {
+                  //    // Navigator.push(
+                  //           // context, MaterialPageRoute(builder: (_) => Jobdetails()));
+                  //   },
+                  // ), 
                   ),
                   Row(
                     children:[ IconButton(onPressed: ()=>{}, icon: Icon(Icons.location_pin)),
@@ -69,7 +69,6 @@ class rejecStateState extends State<rejecState> {
                     ),]
             
                   ),
-                  SizedBox(height: 6,),
                   Row(
                     children: [IconButton(onPressed: ()=>{}, icon: Icon(Icons.calendar_today)),
                   Padding(
@@ -77,7 +76,6 @@ class rejecStateState extends State<rejecState> {
                     child: Text("Apply Date",textAlign:TextAlign.start,),
                   ),]
                   ),
-                  SizedBox(height: 6,),
                 ],
               ),
             ),

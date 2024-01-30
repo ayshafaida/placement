@@ -16,20 +16,20 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.purple[200],
         elevation: 1,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.push(
                          context, MaterialPageRoute(builder: (_) => myprofile()));
           },
         ),
-        actions: [
-        ],
+        title: Text("Edit Profile"),
+        actions: [],
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -39,18 +39,12 @@ class _EditProfileState extends State<EditProfile> {
           },
           child: ListView(
             children: [
-              Text('Edit Profile',style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 35,
-                ),
                 // TextField('Full Name','Eg:-Aysha Faida',false),
                 // TextField('Mobile No','Your Contact No',false),
                 // TextField('Address','Your Address',false),
                 // TextField('Email','Eg:-abc@gmail.com',false),
                 // TextField('Password','Your Password',true),
-                SizedBox(height: 35,),
+                // SizedBox(height: 35,),
                 Row(
                   children: [
                     InkWell(
