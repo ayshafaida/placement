@@ -2,6 +2,7 @@ import 'package:final_project/appliedjobs.dart';
 import 'package:final_project/main.dart';
 import 'package:final_project/myprofile.dart';
 import 'package:final_project/placementcell.dart';
+import 'package:final_project/sample.dart';
 import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,15 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Drawer Widget"),
+        title: Text("College Placement"),
         backgroundColor: Colors.purple[200],
       ),
       //Empty body with a empty container
-      body: Container(),
+      body: SingleChildScrollView(
+        child: Container(height:200,
+       child: CarouselSliderWithDots()),
+       ),
+       
       // Take Drawer widget
       drawer: Drawer(
         //ListView to listdown children of drawer
