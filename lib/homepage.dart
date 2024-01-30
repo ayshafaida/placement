@@ -1,5 +1,3 @@
-import 'package:final_project/accepted.dart';
-import 'package:final_project/applied.dart';
 import 'package:final_project/main.dart';
 import 'package:final_project/myprofile.dart';
 import 'package:final_project/placementcell.dart';

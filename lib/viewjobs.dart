@@ -68,7 +68,6 @@ class _viewjobsState extends State<viewjobs> {
                 ),]
 
               ),
-              SizedBox(height: 6,),
               Row(
                 children: [IconButton(onPressed: ()=>{}, icon: Icon(Icons.business_center_rounded)),
               Padding(
@@ -76,7 +75,6 @@ class _viewjobsState extends State<viewjobs> {
                 child: Text("Experience",textAlign:TextAlign.start,),
               ),]
               ),
-              SizedBox(height: 6,),
             ],
           ),
         ),

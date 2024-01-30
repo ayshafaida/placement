@@ -81,7 +81,11 @@ class rejecStateState extends State<rejecState> {
                 ],
               ),
             ),
-           // Image.network("https://image.similarpng.com/very-thumbnail/2021/05/Rejected-rubber-stamp-on-transparent-background-PNG.png",height: 50,)
+            Positioned(
+              right: 0,
+              top: 10,
+              child: Image.asset("images/rejected123.png",height: 100,))
+        // Image.network("https://image.similarpng.com/very-thumbnail/2021/05/Rejected-rubber-stamp-on-transparent-background-PNG.png",height: 50,)
           ],
         ),
       );
