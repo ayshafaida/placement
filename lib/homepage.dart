@@ -65,8 +65,8 @@ class _HomepageState extends State<Homepage> {
               title: const Text('Applied Job'),
               onTap: () {
                 //Navigator.push(context,MaterialPageRoute(builder: (_) => Applied()));
-               // Navigator.push(context, MaterialPageRoute(builder: (_) => acceptedState()));
-               Navigator.push(context, MaterialPageRoute(builder: (_) => rejecState() ));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => acceptedState()));
+              // Navigator.push(context, MaterialPageRoute(builder: (_) => rejecState() ));
               },
             ),
             // divider,
