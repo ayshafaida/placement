@@ -7,7 +7,7 @@ class Placement_cell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.purple[200],
           title: Center(
             child: const Text('Placement Cell'),
           ),

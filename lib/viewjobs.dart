@@ -21,7 +21,7 @@ class _viewjobsState extends State<viewjobs> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text("View Jobs"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.purple[200],
         centerTitle: true,
       ),
       body: Padding(
@@ -34,7 +34,7 @@ class _viewjobsState extends State<viewjobs> {
         child: Card(
           elevation: 9,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -68,7 +68,6 @@ class _viewjobsState extends State<viewjobs> {
                 ),]
 
               ),
-              SizedBox(height: 6,),
               Row(
                 children: [IconButton(onPressed: ()=>{}, icon: Icon(Icons.business_center_rounded)),
               Padding(
@@ -76,7 +75,6 @@ class _viewjobsState extends State<viewjobs> {
                 child: Text("Experience",textAlign:TextAlign.start,),
               ),]
               ),
-              SizedBox(height: 6,),
             ],
           ),
         ),

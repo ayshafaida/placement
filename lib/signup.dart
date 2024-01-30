@@ -18,7 +18,7 @@ class _SignupState extends State<Signup> {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Registration Page')),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.purple[200],
       ),
       //for the form to be in center
       body: Center(

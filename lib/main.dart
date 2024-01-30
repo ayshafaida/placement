@@ -1,4 +1,3 @@
-import 'package:final_project/accepted.dart';
 import 'package:final_project/homepage.dart';
 import 'package:final_project/sample.dart';
 import 'package:final_project/signup.dart';
@@ -37,7 +36,7 @@ class _LoginState extends State<Login> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Login Page"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.purple[200],
       ),
       body: Center(
         child: Form(
@@ -100,7 +99,7 @@ class _LoginState extends State<Login> {
                 },
                 child: Text(
                   'Forgot Password',
-                  style: TextStyle(color: Colors.green, fontSize: 15),
+                  style: TextStyle(color: Colors.purple[200], fontSize: 15),
                 ),
               ),
               SizedBox(height: 20,),
@@ -108,7 +107,7 @@ class _LoginState extends State<Login> {
                 height: 50,
                 width: 250,
                 decoration: BoxDecoration(
-                    color: Colors.green, borderRadius: BorderRadius.circular(20)),
+                    color: Colors.purple[200], borderRadius: BorderRadius.circular(20)),
                 child: InkWell(
                    onTap: () {
                     if(_formKey.currentState!.validate())
