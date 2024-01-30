@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
-                      hintText: 'Create a secure password'),
+                      hintText: 'Enter your secure password'),
                       validator: (value) {
                         if(value==null || value.isEmpty) {
                           return 'Enter your password';

@@ -52,7 +52,7 @@ class _viewjobsState extends State<viewjobs> {
                 ),
                  trailing:IconButton(
                 icon: const Icon(Icons.arrow_forward_ios_rounded),
-                color: Colors.green,
+                color: Colors.purple[200],
                 onPressed: () {
                   Navigator.push(
                          context, MaterialPageRoute(builder: (_) => Jobdetails()));

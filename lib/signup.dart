@@ -166,6 +166,20 @@ class _SignupState extends State<Signup> {
               const SizedBox(
                 height: 10,
               ),
+              const Text('Password'),
+              const SizedBox(
+                height: 5,
+              ),
+              TextField(
+                // controller: addressController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Create your password',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               //create button for register
               ElevatedButton(
                 onPressed: () {},
