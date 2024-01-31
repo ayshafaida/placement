@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
+  get searchController => null;
+
   @override
   State<Homepage> createState() => _HomepageState();
 }
@@ -22,10 +24,7 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Colors.purple[200],
       ),
       //Empty body with a empty container
-      body: SingleChildScrollView(
-        child: Container(height:200,
-       child: CarouselSliderWithDots()),
-       ),
+     
        
       // Take Drawer widget
       drawer: Drawer(
@@ -69,8 +68,6 @@ class _HomepageState extends State<Homepage> {
               leading: const Icon(Icons.assignment_outlined),
               title: const Text('Apply Job Details'),
               onTap: () {
-                //Navigator.push(context,MaterialPageRoute(builder: (_) => Applied()));
-               // Navigator.push(context, MaterialPageRoute(builder: (_) => acceptedState()));
               Navigator.push(context, MaterialPageRoute(builder: (_) => ApplyDetails() ));
               },
             ),
@@ -109,6 +106,10 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+       body: SingleChildScrollView(
+        child: Container(height:300,
+       child: CarouselSliderWithDots()),
+       ),
     );
   }
 }

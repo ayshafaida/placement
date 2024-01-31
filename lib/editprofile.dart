@@ -21,7 +21,7 @@ class _EditProfileState extends State<EditProfile> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            // color: Colors.white,
           ),
           onPressed: () {
             Navigator.push(

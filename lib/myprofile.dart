@@ -1,4 +1,5 @@
 import 'package:final_project/editprofile.dart';
+import 'package:final_project/homepage.dart';
 import 'package:flutter/material.dart';
 
 class myprofile extends StatelessWidget {
@@ -9,6 +10,16 @@ class myprofile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.purple[200],
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            // color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(
+                         context, MaterialPageRoute(builder: (_) => Homepage()));
+          },
+        ),
           title: Center(
             child: const Text('My Profile'),
           ),
