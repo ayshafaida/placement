@@ -22,7 +22,6 @@ class _viewjobsState extends State<viewjobs> {
         ),
         title: Text("View Jobs"),
         backgroundColor: Colors.purple[200],
-        centerTitle: true,
       ),
       body: Padding(
   padding: const EdgeInsets.all(8.0),

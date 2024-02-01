@@ -17,9 +17,8 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Registration Page')),
+        title: Text('Registration Page')),
         backgroundColor: Colors.purple[200],
-      ),
       //for the form to be in center
       body: Center(
         child: Container(
