@@ -52,7 +52,7 @@ class myprofile extends StatelessWidget {
                 //   size: 15.0,
                 //   color: Color(0xFF404040),
                 // ),
-                  backgroundImage: AssetImage("images/images.png"),
+                  backgroundImage: AssetImage("images/img.jpg"),
 
                   radius: 60.0,
                 ),

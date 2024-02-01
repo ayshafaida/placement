@@ -1,5 +1,6 @@
 import 'package:final_project/announcement.dart';
 import 'package:final_project/homepage.dart';
+import 'package:final_project/jobdetail.dart';
 import 'package:final_project/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -15,15 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
-     home: Login(),
-    //  home:Announcements(),
-     // Homepage(),
-        
-=======
-      home: Login(),
-      // home: EditProfile(),
->>>>>>> 6b3da98e8ed9db6fb8f8abe38ab6df29eecb76a5
+    //  home: Login(),
+     home:Jobdetails(),
     );
   }
 }
