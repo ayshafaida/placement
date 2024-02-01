@@ -1,3 +1,4 @@
+import 'package:final_project/announcement.dart';
 import 'package:final_project/appliedjobs.dart';
 import 'package:final_project/main.dart';
 import 'package:final_project/myprofile.dart';
@@ -84,7 +85,7 @@ class _HomepageState extends State<Homepage> {
               leading: const Icon(Icons.notifications),
               title: const Text('Announcements'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => Announcements()));
               },
             ),
             // divider,
@@ -107,9 +108,10 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
        body: SingleChildScrollView(
-        child: Container(height:300,
-       child: CarouselSliderWithDots()),
+        child: Container(height: 300,
+          child: CarouselSliderWithDots()),
        ),
+       
     );
   }
 }
