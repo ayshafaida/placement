@@ -65,9 +65,7 @@ class Jobdetails extends StatelessWidget {
             ],
           ),
         ),
-<<<<<<< Updated upstream
-      ) );
-=======
+
       ),
       bottomNavigationBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
@@ -113,6 +111,6 @@ class Jobdetails extends StatelessWidget {
         ),
       ),
     );
->>>>>>> Stashed changes
+
   }
 }
