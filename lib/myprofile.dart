@@ -20,10 +20,8 @@ class myprofile extends StatelessWidget {
                          context, MaterialPageRoute(builder: (_) => Homepage()));
           },
         ),
-          title: Center(
-            child: const Text('My Profile'),
+          title: Text('My Profile'),
           ),
-      ),
       // body: SafeArea(child: Column(children: [
       //   Center(child: CircleAvatar(radius: 50,)),
       //   Text(

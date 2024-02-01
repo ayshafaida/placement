@@ -15,10 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
      home: Login(),
     //  home:Announcements(),
      // Homepage(),
         
+=======
+      home: Login(),
+      // home: EditProfile(),
+>>>>>>> 6b3da98e8ed9db6fb8f8abe38ab6df29eecb76a5
     );
   }
 }
