@@ -53,14 +53,38 @@ class Jobdetails extends StatelessWidget {
                           ],
                         ),
                       // SizedBox(height:5,),
-                       Text(
-                        "Zoople IT Company Software & Networking",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold
-                        ),
-                        ),
+                      //  Text(
+                      //   "Zoople IT Company Software & Networking",
+                      //   style: TextStyle(
+                      //     color: Colors.black,
+                      //     fontSize: 17,
+                      //     fontWeight: FontWeight.bold
+                      //   ),
+                      //   ),
+                      //   SizedBox(height: 13,
+                      //   ),
+                      //    Text(
+                      //   "Salary:20000",
+                      //   style: TextStyle(
+                      //     color: Colors.black,
+                      //     fontSize: 15,
+                      //     fontWeight: FontWeight.bold
+                      //   ),
+                      //   ),
+                      //   SizedBox(height: 20,
+                      //   ),
+                      //   Align(
+                      //     alignment:Alignment.centerRight ,
+                      //      ),
+                      //    Text(
+                      //   "Job Description",
+                      //   style: TextStyle(
+                      //     color: Colors.grey[800],
+                      //     fontSize: 15,
+                      //     fontWeight: FontWeight.bold
+                      //   ),
+                      //   ),
+
 
             ],
           ),
