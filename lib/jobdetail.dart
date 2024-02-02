@@ -89,6 +89,52 @@ class Jobdetails extends StatelessWidget {
             ],
           ),
         ),
-      ) );
+
+      ),
+      bottomNavigationBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: Container(
+          padding: EdgeInsets.only(left: 18.0, bottom: 25.0, right: 18.0),
+          // margin: EdgeInsets.only(bottom: 25.0),
+          color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 50.0,
+                height: 50.0,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.purple),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Icon(
+                  Icons.bookmark_border,
+                  color: Colors.purple[200],
+                ),
+              ),
+              SizedBox(width: 15.0),
+              Expanded(
+                child: SizedBox(
+                  height: 50.0,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.purple[200],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                    child: Text(
+                      "Apply for Job",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+
   }
 }
