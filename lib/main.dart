@@ -1,3 +1,4 @@
+import 'package:final_project/editprofile.dart';
 import 'package:final_project/homepage.dart';
 import 'package:final_project/job.dart';
 import 'package:final_project/signup.dart';

@@ -18,7 +18,7 @@ class _EditProfileState extends State<EditProfile> {
         elevation: 1,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
           ),
           onPressed: () {
             Navigator.push(
@@ -35,6 +35,31 @@ class _EditProfileState extends State<EditProfile> {
           },
           child: ListView(
             children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 500,
+                    height: 170,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100), 
+                        child: const Image(image: AssetImage("images/profile.jpg"))
+                         ),
+                  ),
+                  Positioned(
+                    bottom: 15,
+                    right: 180,
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)),
+                      child: const Icon(Icons.camera_alt,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
                 SizedBox(height: 35,),
                 TextField(decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -64,17 +89,6 @@ class _EditProfileState extends State<EditProfile> {
                   onPressed: () {},
                   icon: Icon(Icons.save),
                   label: Text("Save"),),
-                Row(
-                  // children: [
-                  //   InkWell(
-                  //     onTap: () {
-                  //       Navigator.push(
-                  //        context, MaterialPageRoute(builder: (_) => myprofile()));
-                  //     },
-                  //     child: Text("Save",style: TextStyle(color: Colors.purple[800]),),
-                  //   ),
-                  // ],
-                )
             ],
           ),
         ),

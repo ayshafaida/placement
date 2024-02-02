@@ -12,7 +12,7 @@ class myprofile extends StatelessWidget {
           backgroundColor: Colors.purple[200],
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             // color: Colors.white,
           ),
           onPressed: () {
@@ -22,14 +22,6 @@ class myprofile extends StatelessWidget {
         ),
           title: Text('My Profile'),
           ),
-      // body: SafeArea(child: Column(children: [
-      //   Center(child: CircleAvatar(radius: 50,)),
-      //   Text(
-      //     'Name',
-      //     style: TextStyle(fontSize: 40),
-      //   )
-      // ],)
-      // )
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -151,21 +143,6 @@ class myprofile extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15),
-          Container(
-            color: Colors.purple[100],
-            width: MediaQuery.of(context).size.width/2,
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 12,),
-                child: 
-                Text(
-                  "Reg. No.",
-                  style: TextStyle(
-                      letterSpacing: 2.0, fontWeight: FontWeight.w300),
-                ),
-              ),
-            ),
-          ),
   
           SizedBox(height: 30),
           InkWell(
