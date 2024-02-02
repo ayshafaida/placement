@@ -28,7 +28,7 @@ class _AnnouncementsState extends State<Announcements> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.purple[50],
-                        borderRadius: const BorderRadius.only(
+                        borderRadius:  BorderRadius.only(
               bottomLeft: Radius.circular(80.0),
                         ),
                       ),
@@ -41,7 +41,7 @@ class _AnnouncementsState extends State<Announcements> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "title",
+                  "Title",
                   style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10,),
