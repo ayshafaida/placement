@@ -1,4 +1,5 @@
 
+import 'package:final_project/homepage.dart';
 import 'package:final_project/job.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,8 @@ class _viewjobsState extends State<viewjobs> {
           icon: Icon(
             Icons.arrow_back_ios,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (_) => Homepage())),
         ),
         title: Text("View Jobs"),
         backgroundColor: Colors.purple[200],

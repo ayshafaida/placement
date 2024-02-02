@@ -1,6 +1,4 @@
-import 'package:final_project/editprofile.dart';
 import 'package:final_project/homepage.dart';
-import 'package:final_project/job.dart';
 import 'package:final_project/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
      home: Login(),
-      // home:Jobdetails(),
+      // home:Homepage(),
     );
   }
 }
