@@ -1,4 +1,4 @@
-import 'package:final_project/jobdetail.dart';
+import 'package:final_project/job.dart';
 import 'package:flutter/material.dart';
 
 class ApplyForm extends StatefulWidget {
