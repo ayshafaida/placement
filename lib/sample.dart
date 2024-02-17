@@ -1,33 +1,61 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:final_project/commonurl.dart';
+import 'package:final_project/job.dart';
+import 'package:final_project/model/postermodel.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:http/http.dart' as http;
+
 
 
 class CarouselSliderWithDots extends StatefulWidget {
-  final List<String> items = [
-    'https://images.unsplash.com/photo-1688920556232-321bd176d0b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    'https://images.unsplash.com/photo-1689085781839-2e1ff15cb9fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    'https://images.unsplash.com/photo-1688980034676-7e8ee518e75a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80',
-  ];
+  // final List<String> items = [
+  //   'https://images.unsplash.com/photo-1688920556232-321bd176d0b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+  //   'https://images.unsplash.com/photo-1689085781839-2e1ff15cb9fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+  //   'https://images.unsplash.com/photo-1688980034676-7e8ee518e75a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80',
+  // ];
   @override
   State<CarouselSliderWithDots> createState() => _CarouselSliderWithDotsState();
 }
 
 class _CarouselSliderWithDotsState extends State<CarouselSliderWithDots> {
   late CarouselController controller;
-  int currentIndex = 0;
   
   get searchController => null;
 
-  @override
+   @override
   void initState() {
-  
-    controller = CarouselController();
-
     super.initState();
+    fetchPosters();
+  }
+  Future<List<PosterModel>> fetchPosters() async {
+    log("inside");
+
+    log("message");
+    final response =
+        // await http.get(Uri.parse('${Service.url}getacadamics.jsp'));
+        await http.get(Uri.parse('${CommonUrl().mainurl}getPoster.jsp'));
+
+    if (response.statusCode == 200) {
+      log("statusCode====${response.statusCode}");
+
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+      print(parsed);
+
+      return parsed
+          .map<PosterModel>((json) => PosterModel.fromJson(json))
+          .toList();
+    } else {
+      throw Exception('Failed to load course');
+    }
   }
 
-
+  late CarouselController con;
+  late PosterModel postermodel;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,63 +64,116 @@ class _CarouselSliderWithDotsState extends State<CarouselSliderWithDots> {
       body: Center(
         child: Column(
           children: [
-            Container(
-              height: 200,
-              child: Stack(
-                alignment: AlignmentDirectional.topCenter,
-                children: [
-                  Container(
-                          child: CarouselSlider(
-                            carouselController: controller,
-                            items:widget. items.map(
-                                  (item) => Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                   item,
-                                        fit: BoxFit.fill,
-                                        width: double.maxFinite,
-                                      ),
+              Container(
+                height: 200,
+                child: FutureBuilder<List<PosterModel>>(
+                future: fetchPosters(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    log("length====" + snapshot.data!.length.toString());
+                    return
+                     Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Container(
+                          margin: EdgeInsets.all(15),
+                          child: CarouselSlider.builder(
+                            itemCount: snapshot.data!.length,
+                            options: CarouselOptions(
+                              enlargeCenterPage: true,
+                              height: 200,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 3),
+                              reverse: false,
+                              aspectRatio: 5.0,
+                            ),
+                            itemBuilder: ((context, index, realIndex) {
+                              postermodel = snapshot.data![index];
+                              return GestureDetector(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      )),
+                                  //ClipRRect for image border radius
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.network(
+                                      CommonUrl().imageurl + postermodel.poster,
+                                      width: 500,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                )
-                                .toList(),
-                            options: CarouselOptions(
-                              height: 200,
-                              enlargeCenterPage: true,
-                              autoPlay: true,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  currentIndex = index;
-                                });
-                              },
-                            ),
-                          ),
-                  )    ,
-                   Positioned(
-                    bottom: 20,
-                    child: DotsIndicator(
-                      dotsCount: widget.items.length,
-                      position: currentIndex,
-                      onTap: (index) {
-                        controller.animateToPage(index);
-                      },
-                      decorator: DotsDecorator(
-                        color: Colors.white,
-                        activeColor: Colors.blueGrey,
-                        size: const Size.square(10.0),
-                        activeSize: const Size(30.0, 10.0),
-                        activeShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                 
-                ],
+                                ),
+                                onTap: () {
+                                  var url = postermodel.poster[index];
+                                  print(url.toString());
+                                },
+                              );
+                            }),
+                          )),
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                }),
               ),
-            ),
+            //Container(
+            //   height: 200,
+            //   child: Stack(
+            //     alignment: AlignmentDirectional.topCenter,
+            //     children: [
+            //       Container(
+            //               child: CarouselSlider(
+            //                 carouselController: controller,
+            //                 items:widget. items.map(
+            //                       (item) => Padding(
+            //                         padding: const EdgeInsets.all(5),
+            //                         child: ClipRRect(
+            //                           borderRadius: BorderRadius.circular(10),
+            //                           child: Image.network(
+            //                        item,
+            //                             fit: BoxFit.fill,
+            //                             width: double.maxFinite,
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     )
+            //                     .toList(),
+            //                 options: CarouselOptions(
+            //                   height: 200,
+            //                   enlargeCenterPage: true,
+            //                   autoPlay: true,
+            //                   onPageChanged: (index, reason) {
+            //                     setState(() {
+            //                       currentIndex = index;
+            //                     });
+            //                   },
+            //                 ),
+            //               ),
+            //       )    ,
+            //        Positioned(
+            //         bottom: 20,
+            //         child: DotsIndicator(
+            //           dotsCount: widget.items.length,
+            //           position: currentIndex,
+            //           onTap: (index) {
+            //             controller.animateToPage(index);
+            //           },
+            //           decorator: DotsDecorator(
+            //             color: Colors.white,
+            //             activeColor: Colors.blueGrey,
+            //             size: const Size.square(10.0),
+            //             activeSize: const Size(30.0, 10.0),
+            //             activeShape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(12.0),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+                 
+            //     ],
+            //   ),
+            // ),
 
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -125,7 +206,57 @@ class _CarouselSliderWithDotsState extends State<CarouselSliderWithDots> {
             ),
 
 
+Expanded(child: Container(
+  child:Column(children:  List.generate(4, (index){
+    return Card(
+          elevation: 9,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                dense: false,
+                title: Text(
+                  "Job Post",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                subtitle: Text(
+                  "Company Name",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                 trailing:IconButton(
+                icon: const Icon(Icons.arrow_forward_ios_rounded),
+                color: Colors.purple[200],
+                onPressed: () {
+                  Navigator.push(
+                         context, MaterialPageRoute(builder: (_) => Jobdetails()));
+                },
+              ), 
+              ),
+              Row(
+                children:[ IconButton(onPressed: ()=>{}, icon: Icon(Icons.location_pin)),
+                  
+                  Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text("Location",textAlign:TextAlign.start,),
+                ),]
 
+              ),
+              Row(
+                children: [IconButton(onPressed: ()=>{}, icon: Icon(Icons.business_center_rounded)),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("Experience",textAlign:TextAlign.start,),
+              ),]
+              ),
+            ],
+          ),
+        );
+  } ),)
+))
 
           ],
         ),
