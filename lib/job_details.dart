@@ -1,21 +1,39 @@
+import 'dart:developer';
+import 'dart:ui';
+
+import 'package:final_project/applicationform.dart';
+import 'package:final_project/commonurl.dart';
+import 'package:final_project/model/jobmodel.dart';
+import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 
-class Jobdetails extends StatelessWidget {
-  const Jobdetails({super.key});
+class Jobdetails extends StatefulWidget {
+   Jobdetails({super.key,required this.jobdetails});
+   JobModel jobdetails;
+
 
   @override
+  State<Jobdetails> createState() => _JobdetailsState();
+}
+
+class _JobdetailsState extends State<Jobdetails> {
+     String ?jobid;
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
          backgroundColor: Colors.purple[200],
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (_) => viewjobs())),
         ),
-        title: Text("Company Name",
+        title: Text(widget.jobdetails.companyName,
           // company!.companyName!,
         ),
       ),
@@ -30,13 +48,13 @@ class Jobdetails extends StatelessWidget {
                      child: Container(
                        alignment: Alignment(0.0, 2.5),
                        child: CircleAvatar(
-                        backgroundImage: AssetImage("images/img.jpg"),
+                        backgroundImage: NetworkImage( CommonUrl().companyimageurl +widget.jobdetails.image),
                         radius: 40.0,
                        ),
                        ) ),
                        SizedBox(height: 35,),
                        Text(
-                        "Flutter Developer",
+                        widget.jobdetails.jobName,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -54,7 +72,7 @@ class Jobdetails extends StatelessWidget {
                         ),
                       SizedBox(height:5,),
                        Text(
-                        "Zoople IT Company Software & Networking",
+                        widget.jobdetails.companyName,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17,
@@ -64,34 +82,50 @@ class Jobdetails extends StatelessWidget {
                         SizedBox(height: 13,
                         ),
                          Text(
-                        "Salary:20000",
+                        widget.jobdetails.salary,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,
                           fontWeight: FontWeight.bold
                         ),
                         ),
-                        SizedBox(height: 20,
+                         SizedBox(height: 30,
+                         ),
+                        
+                        Padding(
+                          padding:  EdgeInsets.only(left: 20.0,right: 0.0,top: 0.0,bottom: 0.0),
+                          child: Row( crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                              "Job Description",
+                              style: TextStyle(
+                                color: Colors.grey[900],
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.grey,
+                                decorationThickness: 2, 
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Align(
-                          alignment:Alignment.centerRight ,
-                           ),
-                         Text(
-                        "Job Description",
-                        style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
-                        ),
-                        ),
-
-
+                        Padding(
+                                padding:  EdgeInsets.all(20),
+                                child: Text(
+                                  widget.jobdetails.jobDetails,
+                                  // maxLines: 10,
+                                  // overflow: 
+                                 // TextOverflow.ellipsis,
+                                  style: TextStyle(fontSize: 12.0,fontWeight: FontWeight.w500),
+                                  //specifications and UI mockups,developing a cross-browser mobile application'
+                                 ),
+                              )
             ],
           ),
         ),
-
       ),
-      bottomNavigationBar: PreferredSize(
+       bottomNavigationBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Container(
           padding: EdgeInsets.only(left: 18.0, bottom: 25.0, right: 18.0),
@@ -123,9 +157,16 @@ class Jobdetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                    child: Text(
-                      "Apply for Job",
-                      style: TextStyle(color: Colors.white),
+                    child: InkWell(
+                      child: Text(
+                        "Apply for Job",
+                        style: TextStyle(color: Colors.white)),
+                        onTap: () {
+                          jobid=widget.jobdetails.id;
+                          log("jjjobid===="+jobid.toString());
+                          Navigator.push(
+                         context, MaterialPageRoute(builder: (_) => JobApllyForm(jobid:jobid)));
+                        },
                     ),
                   ),
                 ),
@@ -133,8 +174,7 @@ class Jobdetails extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-
+      ), 
+      );
   }
 }

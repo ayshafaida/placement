@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:final_project/announcement.dart';
 import 'package:final_project/appliedjobs.dart';
-import 'package:final_project/job.dart';
+import 'package:final_project/careervideos.dart';
 import 'package:final_project/login.dart';
-import 'package:final_project/main.dart';
 import 'package:final_project/myprofile.dart';
 import 'package:final_project/placementcell.dart';
-import 'package:final_project/sample.dart';
+import 'package:final_project/carousal.dart';
 import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -19,6 +21,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  late SharedPreferences sharedPreferences;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,19 +72,10 @@ class _HomepageState extends State<Homepage> {
             // divider,
             ListTile(
               leading: const Icon(Icons.assignment_outlined),
-              title: const Text('Apply Job Details'),
+              title: const Text('Applied Jobs'),
               onTap: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => ApplyDetails()));
-              },
-            ),
-            // divider,
-            ListTile(
-              leading: const Icon(Icons.contact_page),
-              title: const Text('Placement Cell'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => Placement_cell()));
               },
             ),
             // divider,
@@ -98,15 +92,30 @@ class _HomepageState extends State<Homepage> {
               leading: const Icon(Icons.video_label),
               title: const Text('Career Videos'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => CareerVideos()));
+              },
+            ),
+             ListTile(
+              leading: const Icon(Icons.contact_page),
+              title: const Text('Contact us'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => Placement_cell()));
               },
             ),
             // divider,
             ListTile(
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.push(
+              onTap: ()async {
+                
+
+                log("qqqqq====");
+                sharedPreferences = await SharedPreferences.getInstance();
+                sharedPreferences.setBool('isLoggedIn', false);
+                sharedPreferences.setString('username', "");
+                Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => Login()));
               },
             ),
@@ -167,29 +176,29 @@ class _HomepageState extends State<Homepage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ListTile(
-                            dense: false,
-                            title: Text(
-                              "Job Post",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            subtitle: Text(
-                              "Company Name",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
-                              color: Colors.purple[200],
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => Jobdetails()));
-                              },
-                            ),
-                          ),
+                          // ListTile(
+                          //   dense: false,
+                          //   title: Text(
+                          //     "Job Post",
+                          //     style: TextStyle(
+                          //         fontWeight: FontWeight.bold, fontSize: 20),
+                          //   ),
+                          //   subtitle: Text(
+                          //     "Company Name",
+                          //     style: TextStyle(
+                          //         fontWeight: FontWeight.bold, fontSize: 16),
+                          //   ),
+                          //   trailing: IconButton(
+                          //     icon: const Icon(Icons.arrow_forward_ios_rounded),
+                          //     color: Colors.purple[200],
+                          //     onPressed: () {
+                          //       Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //               builder: (_) => Jobdetails()));
+                          //     },
+                          //   ),
+                          // ),
                           Row(children: [
                             IconButton(
                                 onPressed: () => {},

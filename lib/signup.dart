@@ -21,6 +21,7 @@ class _SignupState extends State<Signup> {
     super.initState();
     getDiptmnt();
   }
+
   String radioButtonItem = 'ONE';
   String department = 'BA.English';
   int id = 1;
@@ -40,6 +41,8 @@ class _SignupState extends State<Signup> {
   late dynamic dropdownValue = null;
   List<DepartmentModel> dipatmntlist = [];
 
+  bool loading=false;
+
   @override
   void dispose() {
     nameController.dispose();
@@ -53,9 +56,8 @@ class _SignupState extends State<Signup> {
   }
 
   signup(name, mobile, address, gender, department_id, email, register_no,
-      password,type) async {
-
-        log("insaid the signup");
+      password, type) async {
+    log("insaid the signup");
     setState(() {
       isLoading = true;
     });
@@ -68,15 +70,19 @@ class _SignupState extends State<Signup> {
       'email': email,
       'register_no': register_no,
       'password': password,
-      'type':type
+      'type': type
     };
-    print("data============="+data.toString());
+    print("data=============" + data.toString());
     final response = await http.post(
-      Uri.parse("http://192.168.29.89:8080/CollegePlacementCell/register.jsp"),
+      Uri.parse('${CommonUrl().mainurl}register.jsp'),
       body: data,
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
+
+      setState(() {
+        loading=false;
+      });
       Map<String, dynamic> resposne = jsonDecode(response.body);
       log(response.body);
       if ("success" == resposne['msg']) {
@@ -98,14 +104,14 @@ class _SignupState extends State<Signup> {
     setState(() {});
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Registration Page'),
         backgroundColor: Colors.purple[200],
-    ),
+        centerTitle: true,
+      ),
       //for the form to be in center
       body: Center(
         child: Container(
@@ -120,17 +126,16 @@ class _SignupState extends State<Signup> {
                   height: 5,
                 ),
                 TextFormField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter Name',
-                  ),
-                  validator: (value) {
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter Name',
+                    ),
+                    validator: (value) {
                       if (value!.isEmpty) {
                         return 'Enter your Name ';
                       }
-                    }
-                ),
+                    }),
                 //some space between name and email
                 const SizedBox(
                   height: 10,
@@ -167,7 +172,7 @@ class _SignupState extends State<Signup> {
                     border: OutlineInputBorder(),
                     hintText: 'Enter Address',
                   ),
-                   validator: (value) {
+                  validator: (value) {
                     if (value!.isEmpty) {
                       return 'Enter your address';
                     }
@@ -243,21 +248,21 @@ class _SignupState extends State<Signup> {
                             border: Border.all(
                                 color: Colors.grey.withOpacity(0.7))),
                         child: DropdownButton<DepartmentModel>(
-                    hint: const Text('Select Dept'),
-                    value: dropdownValue,
+                          hint: const Text('Select Dept'),
+                          value: dropdownValue,
                           icon: const Icon(Icons.arrow_drop_down),
                           iconSize: 24,
                           elevation: 16,
                           underline: SizedBox(),
                           style: const TextStyle(
                               color: Colors.black, fontSize: 18),
-                    onChanged: (DepartmentModel? data) {
-                      setState(() {
-                       dropdownValue = data!;
+                          onChanged: (DepartmentModel? data) {
+                            setState(() {
+                              dropdownValue = data!;
                               deprtmentId = int.parse(data.id);
-                      });
-                    },
-                    items: dipatmntlist
+                            });
+                          },
+                          items: dipatmntlist
                               .map<DropdownMenuItem<DepartmentModel>>(
                                   (DepartmentModel value) {
                             return DropdownMenuItem<DepartmentModel>(
@@ -265,9 +270,9 @@ class _SignupState extends State<Signup> {
                               child: Text(value.department),
                             );
                           }).toList(),
-                    ),
-                    ),
-                     const SizedBox(
+                        ),
+                      ),
+                const SizedBox(
                   height: 20,
                 ),
                 const Text('Email'),
@@ -333,8 +338,8 @@ class _SignupState extends State<Signup> {
                 ),
                 //create button for register
                 ElevatedButton(
-                   style: ElevatedButton.styleFrom(
-                       backgroundColor: Colors.purple[200],
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple[200],
                       padding: const EdgeInsets.all(10)),
                   onPressed: () {
                     log("name==" + nameController.text);
@@ -346,6 +351,10 @@ class _SignupState extends State<Signup> {
                     log("registerno==" + registerNoController.text);
 
                     if (_formKey.currentState!.validate()) {
+
+                          setState(() {
+        loading=true;
+      });
                       signup(
                           nameController.text,
                           mobileController.text,
@@ -354,7 +363,8 @@ class _SignupState extends State<Signup> {
                           deprtmentId.toString(),
                           emailController.text,
                           registerNoController.text,
-                          passwordController.text,"2");
+                          passwordController.text,
+                          "2");
                     }
                   },
                   // child: InkWell(
@@ -362,12 +372,13 @@ class _SignupState extends State<Signup> {
                   //     Navigator.push(
                   //         context, MaterialPageRoute(builder: (_) => Login()));
                   //   },
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    ),
+                  child:
+                  loading==true?CircularProgressIndicator():
+                  
+                   Text(
+                    'Register',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
                   // ),
                 ),
               ],

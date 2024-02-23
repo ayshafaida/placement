@@ -31,6 +31,8 @@ class _LoginState extends State<Login> {
     }
   }
 
+  bool loading=false;
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController registerNoController = TextEditingController();
@@ -47,12 +49,16 @@ class _LoginState extends State<Login> {
     };
 
     final response = await http.post(
-      Uri.parse("http://192.168.29.89:8080/CollegePlacementCell/login.jsp"),
+      Uri.parse("${CommonUrl().mainurl}login.jsp"),
       body: loginData,
     );
 
     print(response.statusCode);
     if (response.statusCode == 200) {
+
+      setState(() {
+        loading=false;
+      });
       if (response.body.contains("success")) {
         log("login successfully completed");
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -81,6 +87,7 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: Text("Login Page"),
         backgroundColor: Colors.purple[200],
+        centerTitle: true,
       ),
       body: Center(
         child: Form(
@@ -161,6 +168,10 @@ class _LoginState extends State<Login> {
                 child: InkWell(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
+
+                        setState(() {
+        loading=true;
+      });
                       log("==========================");
                       login(registerNoController.text, passwordController.text);
                     }

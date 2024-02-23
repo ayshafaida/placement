@@ -1,7 +1,8 @@
 import 'package:final_project/accepted.dart';
-import 'package:final_project/applied.dart';
+import 'package:final_project/appliedpages/applyacceptedpage.dart';
+import 'package:final_project/appliedpages/applypage.dart';
+import 'package:final_project/appliedpages/applyrejectpage.dart';
 import 'package:final_project/homepage.dart';
-import 'package:final_project/rejected.dart';
 import 'package:flutter/material.dart';
 
 class ApplyDetails extends StatefulWidget {
@@ -76,9 +77,9 @@ class _ApplyDetailsState extends State<ApplyDetails> {
                 ]),
           ),
           body: TabBarView(children: [
-            Applied(),
-            acceptedState(),
-            rejecState(),
+            AppliedPage(),
+            ApplyAcceptedPage(),
+            ApplyRejectedPage(),
             // Icon(Icons.apps),
             // Icon(Icons.movie),
             // Icon(Icons.games),
