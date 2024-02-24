@@ -59,7 +59,8 @@ class _viewjobsState extends State<viewjobs> {
         backgroundColor: Colors.purple[200],
         centerTitle: true,
       ),
-      body: Padding(
+      body:
+       Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder<List<JobModel>>(
             future: fetchJob(),
