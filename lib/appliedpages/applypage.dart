@@ -40,7 +40,8 @@ class _AppliedPageState extends State<AppliedPage> {
           future: ApiService().fetchapplyJobs("0"),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
+              return snapshot.data!.length != 0?
+               ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   final applyjobs = snapshot.data![index];
@@ -113,7 +114,7 @@ class _AppliedPageState extends State<AppliedPage> {
                     ),
                   );
                 },
-              );
+              ):Center(child: Text("Not data"),);
             }
             return const Center(child: CircularProgressIndicator());
           },

@@ -1,3 +1,4 @@
+import 'package:final_project/forgotpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -16,9 +17,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool passwordVisible = false;
   @override
   void initState() {
     super.initState();
+    passwordVisible = true;
     _checkSession();
   }
 
@@ -27,14 +30,14 @@ class _LoginState extends State<Login> {
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     log("isloggedin = $isLoggedIn");
     if (isLoggedIn == true) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => Homepage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Homepage()));
     }
   }
 
-  bool loading=false;
+  bool loading = false;
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
   TextEditingController registerNoController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -55,30 +58,38 @@ class _LoginState extends State<Login> {
 
     print(response.statusCode);
     if (response.statusCode == 200) {
-
       setState(() {
-        loading=false;
+        loading = false;
       });
       if (response.body.contains("success")) {
         log("login successfully completed");
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("isLoggedIn", true);
         prefs.setString("username", username);
-        Navigator.push(context, MaterialPageRoute(
+        Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) {
             return Homepage();
           },
         ));
       } else {
         log("login failed");
+        if (response.body.contains("0")) {
+          log("not approved");
+          final snackBar = SnackBar(
+            content: Text(
+              "Not approved !!",
+              style: TextStyle(color: Colors.white),
+            ),
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       }
     } else {
       result = {log(json.decode(response.body)['error'].toString())};
     }
     return result;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -131,11 +142,28 @@ class _LoginState extends State<Login> {
                 //padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   controller: passwordController,
-                  obscureText: true,
+                  obscureText: passwordVisible,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter your secure password'),
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                    hintText: 'Enter your secure password',
+                    suffixIcon: IconButton(
+                      icon: Icon(passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisible = !passwordVisible;
+                          },
+                        );
+                      },
+                    ),
+                    alignLabelWithHint: false,
+                  
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Enter your password';
@@ -149,7 +177,10 @@ class _LoginState extends State<Login> {
               ),
               InkWell(
                 onTap: () {
-                  //TODO FORGOT PASSWORD SCREEN GOES HERE
+                  {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => ForgotPassword()));
+                  }
                 },
                 child: Text(
                   'Forgot Password',
@@ -168,10 +199,9 @@ class _LoginState extends State<Login> {
                 child: InkWell(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-
-                        setState(() {
-        loading=true;
-      });
+                      setState(() {
+                        loading = true;
+                      });
                       log("==========================");
                       login(registerNoController.text, passwordController.text);
                     }

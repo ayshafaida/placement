@@ -69,7 +69,7 @@ class _viewjobsState extends State<viewjobs> {
                 log("length====" + snapshot.data!.length.toString());
                 return
                  ListView.builder(
-                  itemCount: 4,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final jobs=snapshot.data![index];
                     return Padding(
@@ -100,11 +100,14 @@ class _viewjobsState extends State<viewjobs> {
                                     const Icon(Icons.arrow_forward_ios_rounded),
                                 color: Colors.purple[200],
                                 onPressed: () {
+                                                  log("lengthid----------====" + snapshot.data![index].id);
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => Jobdetails(
-                                            jobdetails: jobs,
+                                           compid:jobs.CompanyID, comname:jobs.companyName,comimg:jobs.image,jobid:jobs.id,salary:jobs.salary,dsrption:jobs.jobDetails,jobname:jobs.jobName
+                                            //jobdetails: jobs,
                                           )));
                                 },
                               ),

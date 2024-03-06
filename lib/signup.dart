@@ -15,10 +15,13 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+
+  bool passwordVisible = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    passwordVisible = true;
     getDiptmnt();
   }
 
@@ -322,10 +325,24 @@ class _SignupState extends State<Signup> {
                   height: 5,
                 ),
                 TextFormField(
+                  obscureText: passwordVisible,
                   controller: passwordController,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Create your password',
+                    suffixIcon: IconButton(
+                      icon: Icon(passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisible = !passwordVisible;
+                          },
+                        );
+                      },
+                    ),
+                    alignLabelWithHint: false,
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -364,7 +381,7 @@ class _SignupState extends State<Signup> {
                           emailController.text,
                           registerNoController.text,
                           passwordController.text,
-                          "2");
+                          "3");
                     }
                   },
                   // child: InkWell(

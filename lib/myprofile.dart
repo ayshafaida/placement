@@ -81,7 +81,7 @@ class _myprofileState extends State<myprofile> {
                         Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/img.jpg"),
+                                  image: AssetImage("assets/images/prfl.jpg"),
                                   fit: BoxFit.cover)),
                           child: Container(
                             width: double.infinity,
@@ -235,12 +235,16 @@ class _myprofileState extends State<myprofile> {
                                           gender: snapshot.data!.gender,
                                           department: snapshot.data!.department,
                                           email:snapshot.data!.email,
+                                          depatrid:snapshot.data!.departmentid,
                                         )));
                             // Navigate to update page or show a dialog for updating information
                             // For simplicity, let's print a message for now
                             print('Update button pressed');
                           },
-                          child: Text('Edit Profile'),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            // decoration: BoxDecoration(borderRadius: BorderRadius.circular(40)),
+                            child: Text('Edit Profile',style: TextStyle(fontSize: 18,color: Colors.purple[200]))),
                         ),
                       ],
                     );

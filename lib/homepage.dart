@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:final_project/apiService.dart';
 import 'package:final_project/job_details.dart';
+import 'package:final_project/webservice/webservive.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:final_project/announcement.dart';
@@ -20,41 +22,44 @@ class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   get searchController => null;
+  
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
- @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchJob();
-  }
+//  @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     fetchJob();
+//   }
+  
 
- Future<List<JobModel>> fetchJob() async {
-    log("inside");
+//  Future<List<JobModel>> fetchJob() async {
+//     log("inside");
 
-    log("message");
-    final response =
-        // await http.get(Uri.parse('${Service.url}getacadamics.jsp'));
-        await http.get(Uri.parse('${CommonUrl().mainurl}job.jsp'));
+//     log("message");
+//     final response =
+//         // await http.get(Uri.parse('${Service.url}getacadamics.jsp'));
+//         await http.get(Uri.parse('${CommonUrl().mainurl}job.jsp'));
 
-    if (response.statusCode == 200) {
-      log("statusCode====${response.statusCode}");
+//     if (response.statusCode == 200) {
+//       log("statusCode====${response.statusCode}");
 
-      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+//       final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
 
-      print(parsed);
+//       print(parsed);
 
-      return parsed.map<JobModel>((json) => JobModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load course');
-    }
-  }
+//       return parsed.map<JobModel>((json) => JobModel.fromJson(json)).toList();
+//     } else {
+//       throw Exception('Failed to load course');
+//     }
+//   }
 
   late SharedPreferences sharedPreferences;
+    String? searchKey;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,23 +72,52 @@ class _HomepageState extends State<Homepage> {
       // Take Drawer widget
       drawer: Drawer(
         //ListView to listdown children of drawer
-        child: ListView(
+        child:FutureBuilder(
+        future: ApiService().fetchProfile(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+           // getdata(snapshot.data!.departmentid, snapshot.data!.semesterid);
+            return 
+             ListView(
           padding: EdgeInsets.zero,
           children: [
             //Drawer header for Heading part of drawer
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.purple,
-              ),
-              //Title of header
-              child: Center(
-                child: Text(
-                  'Welcome to Drawer',
-                  style: TextStyle(fontSize: 26, color: Colors.white),
-                ),
-              ),
-            ),
-            //Child tile of drawer with specified title
+
+             DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.purple[200],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.white,
+                          backgroundImage: snapshot.data!.profileImage == "null"
+                              ? AssetImage("assets/images/img.jpg")
+                              : NetworkImage(CommonUrl().imageurl +
+                                  snapshot.data!.profileImage) as ImageProvider,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          snapshot.data!.name,
+                          // 'Sameena',
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        // Text(
+                        //   snapshot.data!.registerid,
+                        //   // 'RGSCA001',
+                        //   style: TextStyle(fontSize: 12, color: Colors.white),
+                        // ),
+                      ],
+                    ),
+                  ),
+         
             ListTile(
               leading: const Icon(Icons.person),
               title: const Text('My Profile'),
@@ -98,7 +132,7 @@ class _HomepageState extends State<Homepage> {
               leading: const Icon(Icons.work),
               title: const Text('View Jobs'),
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => viewjobs()));
               },
             ),
@@ -153,7 +187,14 @@ class _HomepageState extends State<Homepage> {
               },
             ),
           ],
-        ),
+        );
+           
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        })
+  
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -170,6 +211,11 @@ class _HomepageState extends State<Homepage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextField(
+                     onChanged: (value) {
+                            setState(() {
+                              searchKey = value;
+                            });
+                          },
                     // controller: searchController,
                     decoration: InputDecoration(
                       hintText: 'Search...',
@@ -200,13 +246,21 @@ class _HomepageState extends State<Homepage> {
           padding: EdgeInsets.symmetric(vertical: 6),
           height: MediaQuery.of(context).size.height/1.6,
           child: FutureBuilder<List<JobModel>>(
-              future: fetchJob(),
+              future: Webservice().fetchJob(query: searchKey),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  log("length====" + snapshot.data!.length.toString());
+                  log("length hh====" + snapshot.data!.length.toString());
+
+
+                   if (snapshot.data!.length == 0) {
+                    return Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text("No Results Found")],
+                    );
+                  } else {
                   return
                    ListView.builder(
-                    itemCount: 4,
+                    itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       final jobs=snapshot.data![index];
                       return Padding(
@@ -237,11 +291,11 @@ class _HomepageState extends State<Homepage> {
                                       const Icon(Icons.arrow_forward_ios_rounded),
                                   color: Colors.purple[200],
                                   onPressed: () {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) => Jobdetails(
-                                              jobdetails: jobs,
+                                            builder: (_) => Jobdetails(compid:jobs.CompanyID, comname:jobs.companyName,comimg:jobs.image,jobid:jobs.id,salary:jobs.salary,dsrption:jobs.jobDetails,jobname:jobs.jobName
+                                             // jobdetails: jobs,
                                             )));
                                   },
                                 ),
@@ -277,83 +331,14 @@ class _HomepageState extends State<Homepage> {
                     },
                   );
                 }
+                }
                 return Center(child: CircularProgressIndicator());
               }),
         ),
       ),
 
 
-            // Padding(
-            //   padding: const EdgeInsets.all(15),
-            //   child: Container(
-            //       child: Column(
-            //     children: List.generate(4, (index) {
-            //       return Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         // child: Card(
-            //         //   elevation: 9,
-            //         //   shape: RoundedRectangleBorder(
-            //         //     borderRadius: BorderRadius.all(Radius.circular(20)),
-            //         //   ),
-            //         //   child: Column(
-            //         //     mainAxisAlignment: MainAxisAlignment.start,
-            //         //     crossAxisAlignment: CrossAxisAlignment.start,
-            //         //     children: [
-            //         //       // ListTile(
-            //         //       //   dense: false,
-            //         //       //   title: Text(
-            //         //       //     "Job Post",
-            //         //       //     style: TextStyle(
-            //         //       //         fontWeight: FontWeight.bold, fontSize: 20),
-            //         //       //   ),
-            //         //       //   subtitle: Text(
-            //         //       //     "Company Name",
-            //         //       //     style: TextStyle(
-            //         //       //         fontWeight: FontWeight.bold, fontSize: 16),
-            //         //       //   ),
-            //         //       //   trailing: IconButton(
-            //         //       //     icon: const Icon(Icons.arrow_forward_ios_rounded),
-            //         //       //     color: Colors.purple[200],
-            //         //       //     onPressed: () {
-            //         //       //       Navigator.push(
-            //         //       //           context,
-            //         //       //           MaterialPageRoute(
-            //         //       //               builder: (_) => Jobdetails()));
-            //         //       //     },
-            //         //       //   ),
-            //         //       // ),
-            //         //       Row(children: [
-            //         //         IconButton(
-            //         //             onPressed: () => {},
-            //         //             icon: Icon(Icons.location_pin)),
-            //         //         Padding(
-            //         //           padding: const EdgeInsets.only(left: 20),
-            //         //           child: Text(
-            //         //             "Location",
-            //         //             textAlign: TextAlign.start,
-            //         //           ),
-            //         //         ),
-            //         //       ]),
-            //         //       Row(children: [
-            //         //         IconButton(
-            //         //             onPressed: () => {},
-            //         //             icon: Icon(Icons.business_center_rounded)),
-            //         //         Padding(
-            //         //           padding: const EdgeInsets.only(left: 20),
-            //         //           child: Text(
-            //         //             "Experience",
-            //         //             textAlign: TextAlign.start,
-            //         //           ),
-            //         //         ),
-            //         //       ]),
-            //         //     ],
-            //         //   ),
-            //         // ),
-            //       );
-            //     }),
-            //   )
-            //   ),
-            // )
+            
           ],
         ),
       ),

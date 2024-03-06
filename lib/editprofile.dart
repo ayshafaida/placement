@@ -18,9 +18,10 @@ class EditProfile extends StatefulWidget {
       required this.address,
       required this.gender,
       required this.department,
-      required this.email});
+      required this.email,
+      required this.depatrid});
 
-  String? name, mobile, address, gender, department, email;
+  String? name, mobile, address, gender, department, email,depatrid;
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -33,7 +34,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController addressController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   late ccc.SharedPreferences sharedPreferences;
-  bool isLoading=false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -46,6 +47,9 @@ class _EditProfileState extends State<EditProfile> {
       mobileController.text = widget.mobile!;
       addressController.text = widget.address!;
       emailController.text = widget.email!;
+      radioButtonItem=widget.gender!;
+      deprtmentId=int.parse(widget.depatrid!);
+      log("deprtmentId==="+deprtmentId.toString());
     });
   }
 
@@ -54,7 +58,7 @@ class _EditProfileState extends State<EditProfile> {
   late dynamic dropdownValue = null;
   List<DepartmentModel> dipatmntlist = [];
 
-  String radioButtonItem = 'ONE';
+  String radioButtonItem = "";
   String department = 'BA.English';
   int id = 1;
 
@@ -83,7 +87,6 @@ class _EditProfileState extends State<EditProfile> {
       String gender,
       String department_id,
       String email,
-
       File imagefile) async {
     var res;
     var request = http.MultipartRequest(
@@ -107,18 +110,14 @@ class _EditProfileState extends State<EditProfile> {
     Map<String, dynamic> result;
     print(response.statusCode);
     if (response.statusCode == 200) {
-         setState(() {
-                    isLoading=false;
-                  });
+      setState(() {
+        isLoading = false;
+      });
 
-
-       Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-          return Homepage();
-        }));
-     
-      
-    }else{
-
+      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+        return Homepage();
+      }));
+    } else {
       log("Something went wrong");
     }
     return res;
@@ -130,27 +129,20 @@ class _EditProfileState extends State<EditProfile> {
     setState(() {});
   }
 
-
-signup(  String username,
-      String name,
-      String mobile,
-      String address,
-      String gender,
-      String department_id,
-      String email) async {
+  signup(String username, String name, String mobile, String address,
+      String gender, String department_id, String email) async {
     log("insaid the signup");
     setState(() {
       isLoading = true;
     });
     Map data = {
-       'username': username,
+      'username': username,
       'name': name,
       'mobile': mobile,
       'address': address,
       "gender": gender,
       "department": department_id,
       'email': email,
-     
     };
     print("data=============" + data.toString());
     final response = await http.post(
@@ -159,12 +151,9 @@ signup(  String username,
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
-
-   setState(() {
-                    isLoading=false;
-                  });
-
-
+      setState(() {
+        isLoading = false;
+      });
 
       Map<String, dynamic> resposne = jsonDecode(response.body);
       log(response.body);
@@ -180,16 +169,6 @@ signup(  String username,
       print("Please try again!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
   }
-
-
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -238,67 +217,68 @@ signup(  String username,
                                     builder: ((builder) => bottomSheet()),
                                   );
                                 },
-                                child: const CircleAvatar(
+                                child:  CircleAvatar(
                                   radius: 64,
-                                  backgroundImage: NetworkImage(
+                                  backgroundImage:const NetworkImage(
                                       'https://i.stack.imgur.com/l60Hf.png'),
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: Colors.purple[200],
                                 ),
                               )
                             : CircleAvatar(
                                 radius: 64,
                                 backgroundImage: FileImage(imageURI!),
-                                backgroundColor: Colors.red,
+                                  backgroundColor: Colors.purple[200],
                               ),
-                        Positioned(
-                            bottom: 7,
-                            left: 115,
-                            child: Container(
-                              height: 48,
-                              width: 48,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: Colors.white),
-                            )),
-                        Positioned(
-                          bottom: 10,
-                          left: 120,
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.grey[200]),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 17.0,
-                          left: 126,
-                          child: InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: ((builder) => bottomSheet()),
-                              );
-                              print('CLICKEDDDDDD>>>>>>>>>>>>>>>>>>>>>>>');
-                            },
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.teal,
-                              size: 28.0,
-                            ),
-                          ),
-                        ),
+                        // Positioned(
+                        //     bottom: 7,
+                        //     left: 115,
+                        //     child: Container(
+                        //       height: 48,
+                        //       width: 48,
+                        //       decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(100),
+                        //           color: Colors.white),
+                        //     )),
+                        // Positioned(
+                        //   bottom: 10,
+                        //   left: 120,
+                        //   child: Container(
+                        //     height: 40,
+                        //     width: 40,
+                        //     decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(100),
+                        //         color: Colors.grey[200]),
+                        //   ),
+                        // ),
+                        // Positioned(
+                        //   bottom: 17.0,
+                        //   left: 126,
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       showModalBottomSheet(
+                        //         context: context,
+                        //         builder: ((builder) => bottomSheet()),
+                        //       );
+                        //       print('CLICKEDDDDDD>>>>>>>>>>>>>>>>>>>>>>>');
+                        //     },
+                        //     child: Icon(
+                        //       Icons.camera_alt,
+                        //       color: Colors.teal,
+                        //       size: 28.0,
+                        //     ),
+                        //   ),
+                        // ),
                       ]),
                     ),
                   ),
                   Positioned(
-                    bottom: 15,
-                    right: 180,
+                    bottom: 10,
+                    right: 150,
                     child: Container(
                       width: 35,
                       height: 35,
                       decoration: BoxDecoration(
+                        color: Colors.white,
                           borderRadius: BorderRadius.circular(100)),
                       child: const Icon(
                         Icons.camera_alt,
@@ -521,46 +501,53 @@ signup(  String username,
               ),
               FloatingActionButton.extended(
                 onPressed: () async {
+                  log("ccccccccccccccccccccc");
+                  log("dddddd----" + deprtmentId.toString());
 
+                  if (deprtmentId == null) {
+                    log("dddddddddddddddddddddddddddddddddddddddd");
+                  }
 
-log("ccccccccccccccccccccc");
-       log("dddddd----"+deprtmentId.toString());
-
-       if(deprtmentId==null){
-        log("dddddddddddddddddddddddddddddddddddddddd");
-       }
-
-            
                   sharedPreferences = await ccc.SharedPreferences.getInstance();
                   String username = sharedPreferences.getString('username')!;
 
                   setState(() {
-                    isLoading=true;
+                    isLoading = true;
                   });
 
+                  if (imageURI == null) {
+                    signup(
+                        username,
+                        nameController.text,
+                        mobileController.text,
+                        addressController.text,
+                        radioButtonItem.toString(),
+                        deprtmentId.toString(),
+                        emailController.text);
 
-           
+                    log("withoput image");
+                  } else {
+                    updateProfile(
+                        username,
+                        nameController.text,
+                        mobileController.text,
+                        addressController.text,
+                        radioButtonItem.toString(),
+                        deprtmentId.toString(),
+                        emailController.text,
+                        imageURI!);
 
-
-if(imageURI==null){
-
-
-signup(username,nameController.text,mobileController.text,addressController.text,radioButtonItem.toString(), deprtmentId.toString(),emailController.text);
-
-
-  log("withoput image");
-}else{
-
-updateProfile(username,nameController.text,mobileController.text,addressController.text,radioButtonItem.toString(), deprtmentId.toString(),emailController.text,imageURI!);
-
-  ("isnide image");
-}
-
-
-
+                    ("isnide image");
+                  }
                 },
-                icon: Icon(Icons.save),
-                label:isLoading==true?CircularProgressIndicator(): Text("Save"),
+                // icon: Icon(Icons.save),
+                label: isLoading == true
+                    ? CircularProgressIndicator()
+                    : Text(
+                        "Save",
+                        style: TextStyle(
+                             fontSize: 20),
+                      ),
               ),
             ],
           ),

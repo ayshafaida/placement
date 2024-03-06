@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:final_project/commonurl.dart';
 import 'package:final_project/model/applymodel.dart';
+import 'package:final_project/model/profilemodel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,6 +35,30 @@ class ApiService {
     }
     return applyjoblist;
   }
+
+    Future<ProfileModel> fetchProfile() async {
+
+        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  
+     String username = sharedPreferences.getString('username')!;
+      log('username:::::::$username');
+  
+
+    final response = await http.post(
+        Uri.parse('${CommonUrl().mainurl}getprofile.jsp'),
+        body: {"username": username});
+
+    if (response.statusCode == 200) {
+      log("statusCode:===${response.statusCode}");
+      log("statusbody:===${response.body}");
+
+      return ProfileModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
+  //Future<ProfileModel>? futureProfile;
 
   // late Future<List<JobModel>> joblist;
 

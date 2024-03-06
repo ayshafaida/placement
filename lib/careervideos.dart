@@ -82,10 +82,10 @@ class _CareerVideosState extends State<CareerVideos> {
                  Radius.circular(40.0),
                           ),
                         ),
-                        padding: const EdgeInsets.only(
-                          left: 32,
-                          top: 30.0,
-                          bottom: 50,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 20.0,
+                          
                         ),
                         child: Column(
                                crossAxisAlignment: CrossAxisAlignment.start,

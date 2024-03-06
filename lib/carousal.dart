@@ -95,7 +95,7 @@ class _CarouselSliderWithDotsState extends State<CarouselSliderWithDots> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
                                     child: Image.network(
-                                      CommonUrl().imageurl + postermodel.poster,
+                                      CommonUrl().companyimageurl + postermodel.poster,
                                       width: 500,
                                       fit: BoxFit.cover,
                                     ),

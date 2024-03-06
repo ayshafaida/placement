@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:final_project/commonurl.dart';
+import 'package:final_project/homepage.dart';
 import 'package:http/http.dart' as http;
 import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:placement/viewjobs.dart';
 
 class JobApllyForm extends StatefulWidget {
-  String? jobid;
-  JobApllyForm({super.key, required this.jobid});
+  String? jobid, companyid;
+  JobApllyForm({super.key, required this.jobid, required this.companyid});
 
   @override
   State<JobApllyForm> createState() => _JobApllyFormState();
@@ -59,8 +60,14 @@ class _JobApllyFormState extends State<JobApllyForm> {
   //   });
   // }
 
-  Future<Map<String, dynamic>> updateProfile(String username, String name,
-      String mobile, String email, String address, File? imagefile) async {
+  Future<Map<String, dynamic>> updateProfile(
+      String username,
+      String name,
+      String mobile,
+      String email,
+      String address,
+      File? imagefile,
+      String companyid) async {
     log("calleed");
     // Map<String, dynamic> result;
     var res;
@@ -75,6 +82,7 @@ class _JobApllyFormState extends State<JobApllyForm> {
     request.fields['address'] = address;
     request.fields['jobid'] = widget.jobid!;
     request.fields['date'] = dateStr!;
+    request.fields['companyid'] = widget.companyid!;
 
     var response = await request.send();
     var responseData = await response.stream.toBytes();
@@ -83,8 +91,8 @@ class _JobApllyFormState extends State<JobApllyForm> {
 
     print(response.statusCode);
     if (response.statusCode == 200) {
-                        Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => viewjobs()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Homepage()));
       setState(() {
         uploadStatus = "File Uploaded Succesfully";
       });
@@ -98,7 +106,8 @@ class _JobApllyFormState extends State<JobApllyForm> {
 
   @override
   Widget build(BuildContext context) {
-    log("jobiD======" + widget.jobid!);
+    log("jobiD======+++++++++" + widget.jobid!);
+    log("companyid=====+++++++=" + widget.companyid!);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Apply"),
@@ -222,9 +231,9 @@ class _JobApllyFormState extends State<JobApllyForm> {
                           _pickFile();
                         });
                       },
-                      style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 159, 245, 156))),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.purple[50])),
                       icon: const Icon(Icons.insert_drive_file_sharp),
                       label: const Text(
                         'Upload CV',
@@ -243,7 +252,7 @@ class _JobApllyFormState extends State<JobApllyForm> {
         preferredSize: Size.fromHeight(50.0),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          // margin: EdgeInsets.only(bottom: 25.0),
+          margin: EdgeInsets.only(bottom: 10.0),
           color: Colors.white,
           child: Expanded(
             child: SizedBox(
@@ -259,14 +268,26 @@ class _JobApllyFormState extends State<JobApllyForm> {
 
                   sharedPreferences = await SharedPreferences.getInstance();
                   String username = sharedPreferences.getString('username')!;
+                  if (_formKey.currentState!.validate()) {
+                    if (pickedFile != null) {
+                      updateProfile(
+                          username,
+                          nameController.text,
+                          mobileController.text,
+                          emailController.text,
+                          addressController.text,
+                          pickedFile,
+                          widget.companyid!);
+                    }else{
+                    final snackBar = SnackBar(
+                      content: Text(
+                        "Select CV !!",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
 
-                  updateProfile(
-                      username,
-                      nameController.text,
-                      mobileController.text,
-                      emailController.text,
-                      addressController.text,
-                      pickedFile);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }}
 
                   // Navigator.pushReplacement(context,
                   //     MaterialPageRoute(builder: (context) => viewjobs()));

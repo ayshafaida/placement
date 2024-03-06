@@ -8,8 +8,9 @@ import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 
 class Jobdetails extends StatefulWidget {
-   Jobdetails({super.key,required this.jobdetails});
-   JobModel jobdetails;
+   Jobdetails({super.key,required this.compid,required this.comname,required this.comimg,required this.jobid,required this.salary,required this.dsrption,required this.jobname});
+   //JobModel jobdetails;
+   String compid,comname,comimg,jobid,salary,dsrption,jobname;
 
 
   @override
@@ -33,7 +34,7 @@ class _JobdetailsState extends State<Jobdetails> {
           onPressed: () => Navigator.push(
               context, MaterialPageRoute(builder: (_) => viewjobs())),
         ),
-        title: Text(widget.jobdetails.companyName,
+        title: Text(widget.comname,
           // company!.companyName!,
         ),
       ),
@@ -48,13 +49,13 @@ class _JobdetailsState extends State<Jobdetails> {
                      child: Container(
                        alignment: Alignment(0.0, 2.5),
                        child: CircleAvatar(
-                        backgroundImage: NetworkImage( CommonUrl().companyimageurl +widget.jobdetails.image),
+                        backgroundImage: NetworkImage( CommonUrl().companyimageurl +widget.comimg),
                         radius: 40.0,
                        ),
                        ) ),
                        SizedBox(height: 35,),
                        Text(
-                        widget.jobdetails.jobName,
+                        widget.jobname,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -72,7 +73,7 @@ class _JobdetailsState extends State<Jobdetails> {
                         ),
                       SizedBox(height:5,),
                        Text(
-                        widget.jobdetails.companyName,
+                        widget.comname,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17,
@@ -82,7 +83,7 @@ class _JobdetailsState extends State<Jobdetails> {
                         SizedBox(height: 13,
                         ),
                          Text(
-                        widget.jobdetails.salary,
+                        widget.salary,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,
@@ -113,7 +114,7 @@ class _JobdetailsState extends State<Jobdetails> {
                         Padding(
                                 padding:  EdgeInsets.all(20),
                                 child: Text(
-                                  widget.jobdetails.jobDetails,
+                                  widget.dsrption,
                                   // maxLines: 10,
                                   // overflow: 
                                  // TextOverflow.ellipsis,
@@ -133,41 +134,39 @@ class _JobdetailsState extends State<Jobdetails> {
           color: Colors.white,
           child: Row(
             children: <Widget>[
-              Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.purple),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Icon(
-                  Icons.bookmark_border,
-                  color: Colors.purple[200],
-                ),
-              ),
+              // Container(
+              //   width: 50.0,
+              //   height: 50.0,
+              //   decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.purple),
+              //     borderRadius: BorderRadius.circular(12.0),
+              //   ),
+              //   child: Icon(
+              //     Icons.bookmark_border,
+              //     color: Colors.purple[200],
+              //   ),
+              // ),
               SizedBox(width: 15.0),
               Expanded(
                 child: SizedBox(
                   height: 50.0,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                          jobid=widget.jobid;
+                           String  comapnyid=widget.compid;
+                          log("jjjobid---------------------------===="+jobid.toString());
+                          Navigator.pushReplacement(
+                         context, MaterialPageRoute(builder: (_) => JobApllyForm(jobid:jobid,companyid:comapnyid)));
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.purple[200],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                    child: InkWell(
-                      child: Text(
-                        "Apply for Job",
-                        style: TextStyle(color: Colors.white)),
-                        onTap: () {
-                          jobid=widget.jobdetails.id;
-                          log("jjjobid===="+jobid.toString());
-                          Navigator.push(
-                         context, MaterialPageRoute(builder: (_) => JobApllyForm(jobid:jobid)));
-                        },
-                    ),
+                    child: Text(
+                      "Apply for Job",
+                      style: TextStyle(color: Colors.white)),
                   ),
                 ),
               )

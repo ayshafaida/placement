@@ -7,6 +7,7 @@ class ProfileModel {
     final String profileImage;
     final String mobile;
     final String email;
+    final String departmentid;
 
     ProfileModel({
         required this.id,
@@ -17,6 +18,7 @@ class ProfileModel {
         required this.profileImage,
         required this.mobile,
         required this.email,
+        required this.departmentid,
     });
 
     factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -28,6 +30,7 @@ class ProfileModel {
         profileImage: json["profile_image"],
         mobile: json["mobile"],
         email: json["email"],
+        departmentid: json["departmentid"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,5 +42,6 @@ class ProfileModel {
         "profile_image": profileImage,
         "mobile": mobile,
         "email": email,
+        "departmentid": departmentid,
     };
 }
