@@ -60,7 +60,6 @@ class _myprofileState extends State<myprofile> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
-              // color: Colors.white,
             ),
             onPressed: () {
               Navigator.push(
@@ -90,32 +89,14 @@ class _myprofileState extends State<myprofile> {
                                 alignment: Alignment(0.0, 2.5),
                                 child: snapshot.data!.profileImage == "null"
                                     ? CircleAvatar(
-                                        //   backgroundColor: Colors.white,
-                                        // radius: 12.0,
-                                        // child: Icon(
-                                        //   Icons.camera_alt,
-                                        //   size: 15.0,
-                                        //   color: Color(0xFF404040),
-                                        // ),
-
                                         backgroundImage:
                                             AssetImage("assets/images/img.jpg"),
-
                                         radius: 60.0,
                                       )
                                     : CircleAvatar(
-                                        //   backgroundColor: Colors.white,
-                                        // radius: 12.0,
-                                        // child: Icon(
-                                        //   Icons.camera_alt,
-                                        //   size: 15.0,
-                                        //   color: Color(0xFF404040),
-                                        // ),
-
                                         backgroundImage: NetworkImage(
                                             CommonUrl().imageurl +
                                                 snapshot.data!.profileImage),
-
                                         radius: 60.0,
                                       )),
                           ),
@@ -234,17 +215,18 @@ class _myprofileState extends State<myprofile> {
                                           address: snapshot.data!.address,
                                           gender: snapshot.data!.gender,
                                           department: snapshot.data!.department,
-                                          email:snapshot.data!.email,
-                                          depatrid:snapshot.data!.departmentid,
+                                          email: snapshot.data!.email,
+                                          depatrid: snapshot.data!.departmentid,
                                         )));
-                            // Navigate to update page or show a dialog for updating information
-                            // For simplicity, let's print a message for now
+
                             print('Update button pressed');
                           },
                           child: Container(
-                            padding: EdgeInsets.all(8),
-                            // decoration: BoxDecoration(borderRadius: BorderRadius.circular(40)),
-                            child: Text('Edit Profile',style: TextStyle(fontSize: 18,color: Colors.purple[200]))),
+                              padding: EdgeInsets.all(8),
+                              child: Text('Edit Profile',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.purple[200]))),
                         ),
                       ],
                     );
@@ -252,7 +234,6 @@ class _myprofileState extends State<myprofile> {
                   return Center(child: CircularProgressIndicator());
                 }),
           ),
-          //  )
         ));
   }
 }

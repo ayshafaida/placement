@@ -19,8 +19,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     // TODO: implement initState
     super.initState();
     passwordVisible = true;
-    confirmpwdVisible =true;
+    confirmpwdVisible = true;
   }
+
   bool passwordVisible = false;
   bool confirmpwdVisible = false;
   bool loading = false;
@@ -48,9 +49,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
     print(response.statusCode);
     if (response.statusCode == 200) {
-      // setState(() {
-      //   loading = true;
-      // });
       if (response.body.contains("success")) {
         log("Password successfully changed");
 
@@ -84,7 +82,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextFormField(
                     controller: registerNoController,
@@ -103,29 +100,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-                  // padding: EdgeInsets.symmetric(horizontal: 15),
                   child: TextFormField(
                     controller: passwordController,
                     obscureText: passwordVisible,
-                    decoration:  InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'New Password',
-                        hintText: 'Create new password',
-                         suffixIcon: IconButton(
-                      icon: Icon(passwordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                      onPressed: () {
-                        setState(
-                          () {
-                            passwordVisible = !passwordVisible;
-                          },
-                        );
-                      },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'New Password',
+                      hintText: 'Create new password',
+                      suffixIcon: IconButton(
+                        icon: Icon(passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(
+                            () {
+                              passwordVisible = !passwordVisible;
+                            },
+                          );
+                        },
+                      ),
+                      alignLabelWithHint: false,
                     ),
-                    alignLabelWithHint: false,
-                        ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Enter password';
@@ -137,28 +132,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  //padding: EdgeInsets.symmetric(horizontal: 15),
                   child: TextFormField(
                     controller: confirmpwdController,
                     obscureText: confirmpwdVisible,
-                    decoration:  InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Confirm Password',
-                        hintText: 'Enter your password again',
-                         suffixIcon: IconButton(
-                      icon: Icon(confirmpwdVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                      onPressed: () {
-                        setState(
-                          () {
-                            confirmpwdVisible = !confirmpwdVisible;
-                          },
-                        );
-                      },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Confirm Password',
+                      hintText: 'Enter your password again',
+                      suffixIcon: IconButton(
+                        icon: Icon(confirmpwdVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(
+                            () {
+                              confirmpwdVisible = !confirmpwdVisible;
+                            },
+                          );
+                        },
+                      ),
+                      alignLabelWithHint: false,
                     ),
-                    alignLabelWithHint: false,
-                        ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Enter your password again';

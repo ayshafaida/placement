@@ -1,8 +1,5 @@
-
-import 'package:final_project/forgotpassword.dart';
 import 'package:final_project/login.dart';
 import 'package:flutter/material.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Login(),
-      // home:ForgotPassword(),
     );
   }
 }
-

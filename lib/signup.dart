@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:final_project/commonurl.dart';
 import 'package:final_project/login.dart';
 import 'package:http/http.dart' as http;
-import 'package:final_project/main.dart';
 import 'package:final_project/model/departmentmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +14,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-
   bool passwordVisible = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     passwordVisible = true;
     getDiptmnt();
@@ -28,7 +25,7 @@ class _SignupState extends State<Signup> {
   String radioButtonItem = 'ONE';
   String department = 'BA.English';
   int id = 1;
-  //List<String> dept = ['BA.English', 'BA.Sociology', 'BSc.Computer Science','BSc.Chemistry','BSc.Psychology','B.Com(Finance)','B.com(CA)','BBA'];
+
   bool isLoading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -44,7 +41,7 @@ class _SignupState extends State<Signup> {
   late dynamic dropdownValue = null;
   List<DepartmentModel> dipatmntlist = [];
 
-  bool loading=false;
+  bool loading = false;
 
   @override
   void dispose() {
@@ -53,7 +50,7 @@ class _SignupState extends State<Signup> {
     addressController.dispose();
     emailController.dispose();
     registerNoController.dispose();
-    // ignore: avoid_print
+
     print('Dispose used');
     super.dispose();
   }
@@ -82,9 +79,8 @@ class _SignupState extends State<Signup> {
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
-
       setState(() {
-        loading=false;
+        loading = false;
       });
       Map<String, dynamic> resposne = jsonDecode(response.body);
       log(response.body);
@@ -115,7 +111,6 @@ class _SignupState extends State<Signup> {
         backgroundColor: Colors.purple[200],
         centerTitle: true,
       ),
-      //for the form to be in center
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -139,7 +134,6 @@ class _SignupState extends State<Signup> {
                         return 'Enter your Name ';
                       }
                     }),
-                //some space between name and email
                 const SizedBox(
                   height: 10,
                 ),
@@ -296,7 +290,6 @@ class _SignupState extends State<Signup> {
                     }
                   },
                 ),
-                //some space between email and mobile
                 const SizedBox(
                   height: 10,
                 ),
@@ -316,7 +309,6 @@ class _SignupState extends State<Signup> {
                     }
                   },
                 ),
-                //some space between name and email
                 const SizedBox(
                   height: 10,
                 ),
@@ -327,7 +319,7 @@ class _SignupState extends State<Signup> {
                 TextFormField(
                   obscureText: passwordVisible,
                   controller: passwordController,
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Create your password',
                     suffixIcon: IconButton(
@@ -353,7 +345,6 @@ class _SignupState extends State<Signup> {
                 SizedBox(
                   height: 10,
                 ),
-                //create button for register
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple[200],
@@ -368,10 +359,9 @@ class _SignupState extends State<Signup> {
                     log("registerno==" + registerNoController.text);
 
                     if (_formKey.currentState!.validate()) {
-
-                          setState(() {
-        loading=true;
-      });
+                      setState(() {
+                        loading = true;
+                      });
                       signup(
                           nameController.text,
                           mobileController.text,
@@ -384,19 +374,12 @@ class _SignupState extends State<Signup> {
                           "3");
                     }
                   },
-                  // child: InkWell(
-                  //   onTap: () {
-                  //     Navigator.push(
-                  //         context, MaterialPageRoute(builder: (_) => Login()));
-                  //   },
-                  child:
-                  loading==true?CircularProgressIndicator():
-                  
-                   Text(
-                    'Register',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                  // ),
+                  child: loading == true
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Register',
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
                 ),
               ],
             ),
@@ -405,8 +388,6 @@ class _SignupState extends State<Signup> {
       ),
     );
   }
-
-  //================create department api function===============
 
   Future<List<DepartmentModel>> fetchDepartments() async {
     try {

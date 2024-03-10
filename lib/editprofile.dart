@@ -21,7 +21,7 @@ class EditProfile extends StatefulWidget {
       required this.email,
       required this.depatrid});
 
-  String? name, mobile, address, gender, department, email,depatrid;
+  String? name, mobile, address, gender, department, email, depatrid;
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -47,9 +47,9 @@ class _EditProfileState extends State<EditProfile> {
       mobileController.text = widget.mobile!;
       addressController.text = widget.address!;
       emailController.text = widget.email!;
-      radioButtonItem=widget.gender!;
-      deprtmentId=int.parse(widget.depatrid!);
-      log("deprtmentId==="+deprtmentId.toString());
+      radioButtonItem = widget.gender!;
+      deprtmentId = int.parse(widget.depatrid!);
+      log("deprtmentId===" + deprtmentId.toString());
     });
   }
 
@@ -66,12 +66,11 @@ class _EditProfileState extends State<EditProfile> {
   PickedFile? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
-  //final _formKey = GlobalKey<FormState>();
   String uploadStatus = "";
 
   Future getImageFromGallery(ImageSource source) async {
     var image = await ImagePicker().pickImage(source: source);
-    //  (source: ImageSource.camera);
+
     final imageTemporary = File(image!.path);
     setState(() {
       imageURI = imageTemporary;
@@ -100,8 +99,6 @@ class _EditProfileState extends State<EditProfile> {
     request.fields['gender'] = gender;
     request.fields['department'] = department_id;
     request.fields['email'] = email;
-
-    // request.fields['examtitle'] = examtitle;
 
     var response = await request.send();
     var responseData = await response.stream.toBytes();
@@ -198,14 +195,6 @@ class _EditProfileState extends State<EditProfile> {
             children: [
               Stack(
                 children: [
-                  // SizedBox(
-                  //   width: 500,
-                  //   height: 170,
-                  //   child: ClipRRect(
-                  //       borderRadius: BorderRadius.circular(100),
-                  //       child: const Image(
-                  //           image: AssetImage("images/profile.jpg"))),
-                  // ),
                   Center(
                     child: Container(
                       child: Stack(children: <Widget>[
@@ -217,9 +206,9 @@ class _EditProfileState extends State<EditProfile> {
                                     builder: ((builder) => bottomSheet()),
                                   );
                                 },
-                                child:  CircleAvatar(
+                                child: CircleAvatar(
                                   radius: 64,
-                                  backgroundImage:const NetworkImage(
+                                  backgroundImage: const NetworkImage(
                                       'https://i.stack.imgur.com/l60Hf.png'),
                                   backgroundColor: Colors.purple[200],
                                 ),
@@ -227,47 +216,8 @@ class _EditProfileState extends State<EditProfile> {
                             : CircleAvatar(
                                 radius: 64,
                                 backgroundImage: FileImage(imageURI!),
-                                  backgroundColor: Colors.purple[200],
+                                backgroundColor: Colors.purple[200],
                               ),
-                        // Positioned(
-                        //     bottom: 7,
-                        //     left: 115,
-                        //     child: Container(
-                        //       height: 48,
-                        //       width: 48,
-                        //       decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(100),
-                        //           color: Colors.white),
-                        //     )),
-                        // Positioned(
-                        //   bottom: 10,
-                        //   left: 120,
-                        //   child: Container(
-                        //     height: 40,
-                        //     width: 40,
-                        //     decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(100),
-                        //         color: Colors.grey[200]),
-                        //   ),
-                        // ),
-                        // Positioned(
-                        //   bottom: 17.0,
-                        //   left: 126,
-                        //   child: InkWell(
-                        //     onTap: () {
-                        //       showModalBottomSheet(
-                        //         context: context,
-                        //         builder: ((builder) => bottomSheet()),
-                        //       );
-                        //       print('CLICKEDDDDDD>>>>>>>>>>>>>>>>>>>>>>>');
-                        //     },
-                        //     child: Icon(
-                        //       Icons.camera_alt,
-                        //       color: Colors.teal,
-                        //       size: 28.0,
-                        //     ),
-                        //   ),
-                        // ),
                       ]),
                     ),
                   ),
@@ -278,7 +228,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 35,
                       height: 35,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(100)),
                       child: const Icon(
                         Icons.camera_alt,
@@ -297,19 +247,12 @@ class _EditProfileState extends State<EditProfile> {
                 height: 5,
               ),
               TextFormField(
-                // initialValue: widget.name,
                 controller: nameController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Name',
                 ),
-                // validator: (value) {
-                //   if (value!.isEmpty) {
-                //     return 'Enter your Name ';
-                //   }
-                // }
               ),
-              //some space between name and email
               const SizedBox(
                 height: 10,
               ),
@@ -318,20 +261,12 @@ class _EditProfileState extends State<EditProfile> {
                 height: 5,
               ),
               TextFormField(
-                // initialValue: widget.mobile,
                 controller: mobileController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Mobile',
                 ),
                 keyboardType: TextInputType.phone,
-                // validator: (value) {
-                //   if (value!.isEmpty) {
-                //     return "please enter phone ";
-                //   } else if (value.length > 10 || value.length < 10) {
-                //     return "Please enter valid phone number ";
-                //   }
-                // },
               ),
               const SizedBox(
                 height: 10,
@@ -341,17 +276,11 @@ class _EditProfileState extends State<EditProfile> {
                 height: 5,
               ),
               TextFormField(
-                // initialValue: widget.address,
                 controller: addressController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Address',
                 ),
-                // validator: (value) {
-                //   if (value!.isEmpty) {
-                //     return 'Enter your address';
-                //   }
-                // },
               ),
               SizedBox(
                 height: 10,
@@ -455,47 +384,15 @@ class _EditProfileState extends State<EditProfile> {
                 height: 5,
               ),
               TextFormField(
-                //  initialValue: widget.email,
                 controller: emailController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Email',
                 ),
-                // validator: (value) {
-                //   if (value!.isEmpty) {
-                //     return 'Enter your email';
-                //   } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                //     return "Please enter a valid email address";
-                //   }
-                // },
               ),
-              //some space between email and mobile
               const SizedBox(
                 height: 10,
               ),
-              // TextField(decoration: const InputDecoration(
-              //   border: OutlineInputBorder(),
-              //   hintText: 'Enter Name',
-              // ),
-              // ),
-              // SizedBox(height: 20,),
-              // TextField(decoration: const InputDecoration(
-              //   border: OutlineInputBorder(),
-              //   hintText: 'Mobile No.',
-              // ),
-              // ),
-              // SizedBox(height: 20,),
-              // TextField(decoration: const InputDecoration(
-              //   border: OutlineInputBorder(),
-              //   hintText: 'Address',
-              // ),
-              // ),
-              // SizedBox(height: 20,),
-              // TextField(decoration: const InputDecoration(
-              //   border: OutlineInputBorder(),
-              //   hintText: 'Email',
-              // ),
-              // ),
               SizedBox(
                 height: 20,
               ),
@@ -540,13 +437,11 @@ class _EditProfileState extends State<EditProfile> {
                     ("isnide image");
                   }
                 },
-                // icon: Icon(Icons.save),
                 label: isLoading == true
                     ? CircularProgressIndicator()
                     : Text(
                         "Save",
-                        style: TextStyle(
-                             fontSize: 20),
+                        style: TextStyle(fontSize: 20),
                       ),
               ),
             ],
@@ -597,8 +492,6 @@ class _EditProfileState extends State<EditProfile> {
               icon: Icon(Icons.camera),
               onPressed: () {
                 getImageFromGallery(ImageSource.camera);
-
-                //   takePhoto(ImageSource.camera);
               },
               label: Text("Camera"),
             ),
@@ -614,15 +507,4 @@ class _EditProfileState extends State<EditProfile> {
       ),
     );
   }
-
-  // void takePhoto(ImageSource source) async {
-  //   final pickedFile = await _picker.getImage(
-  //     source: source,
-  //   );
-  //   setState(() {
-  //     _imageFile = pickedFile!;
-  //     print("<<<<<<<<<<<<<<<<<<< IMAGE >>>>>>>>>>>>>>>>>>>>>>>" +
-  //         _imageFile!.path);
-  //   });
-  // }
 }

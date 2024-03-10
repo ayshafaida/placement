@@ -36,13 +36,11 @@ class ApiService {
     return applyjoblist;
   }
 
-    Future<ProfileModel> fetchProfile() async {
+  Future<ProfileModel> fetchProfile() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  
-     String username = sharedPreferences.getString('username')!;
-      log('username:::::::$username');
-  
+    String username = sharedPreferences.getString('username')!;
+    log('username:::::::$username');
 
     final response = await http.post(
         Uri.parse('${CommonUrl().mainurl}getprofile.jsp'),
@@ -57,43 +55,4 @@ class ApiService {
       throw Exception('Failed to load album');
     }
   }
-
-  //Future<ProfileModel>? futureProfile;
-
-  // late Future<List<JobModel>> joblist;
-
-  // Future<List<JobModel>> fetchJobs() async {
-  //   try {
-  //     log("inside the fetchJobs functionmessage");
-  //     final response =
-  //         await http.get(Uri.parse('${CommonUrl().mainurl}getJobs.jsp'));
-
-  //     if (response.statusCode == 200) {
-  //       log("Jobs==== : ${response.body}");
-  //       List res = jsonDecode(response.body);
-  //       return res.map((e) => JobModel.fromJson(e)).toList();
-  //     }
-  //   } catch (e) {
-  //     log(" District message  :$e");
-  //   }
-  //   return joblist;
-  // }
-
-  // late Future<List<AnnouncementModel>> announcementlist;
-  // Future<List<AnnouncementModel>> fetchannouncements() async {
-  //   try {
-  //     log("inside the fetchannouncements functionmessage");
-  //     final response = await http
-  //         .get(Uri.parse('${CommonUrl().mainurl}getannouncement.jsp'));
-
-  //     if (response.statusCode == 200) {
-  //       log("Jobs==== : ${response.body}");
-  //       List res = jsonDecode(response.body);
-  //       return res.map((e) => AnnouncementModel.fromJson(e)).toList();
-  //     }
-  //   } catch (e) {
-  //     log(" District message  :$e");
-  //   }
-  //   return announcementlist;
-  // }
 }

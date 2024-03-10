@@ -1,4 +1,3 @@
-import 'package:final_project/accepted.dart';
 import 'package:final_project/appliedpages/applyacceptedpage.dart';
 import 'package:final_project/appliedpages/applypage.dart';
 import 'package:final_project/appliedpages/applyrejectpage.dart';
@@ -80,9 +79,6 @@ class _ApplyDetailsState extends State<ApplyDetails> {
             AppliedPage(),
             ApplyAcceptedPage(),
             ApplyRejectedPage(),
-            // Icon(Icons.apps),
-            // Icon(Icons.movie),
-            // Icon(Icons.games),
           ]),
         ));
   }

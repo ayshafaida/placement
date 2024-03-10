@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:final_project/commonurl.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:final_project/homepage.dart';
 import 'package:final_project/signup.dart';
@@ -30,14 +29,15 @@ class _LoginState extends State<Login> {
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     log("isloggedin = $isLoggedIn");
     if (isLoggedIn == true) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Homepage()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => Homepage()));
     }
   }
 
   bool loading = false;
 
   final _formKey = GlobalKey<FormState>();
-  // TextEditingController emailController = TextEditingController();
+
   TextEditingController registerNoController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -107,20 +107,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 60.0),
-              //   child: Center(
-              //     child: Container(
-              //         width: 200,
-              //         height: 150,
-              //         /*decoration: BoxDecoration(
-              //             color: Colors.red,
-              //             borderRadius: BorderRadius.circular(50.0)),*/
-              //         child: Image.asset('asset/images/flutter-logo.png')),
-              //   ),
-              // ),
               Padding(
-                //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   controller: registerNoController,
@@ -139,7 +126,6 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 15.0, right: 15.0, top: 15, bottom: 0),
-                //padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   controller: passwordController,
                   obscureText: passwordVisible,
@@ -160,7 +146,6 @@ class _LoginState extends State<Login> {
                       },
                     ),
                     alignLabelWithHint: false,
-                  
                   ),
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
@@ -205,11 +190,6 @@ class _LoginState extends State<Login> {
                       log("==========================");
                       login(registerNoController.text, passwordController.text);
                     }
-
-                    // {
-                    //  Navigator.push(
-                    //      context, MaterialPageRoute(builder: (_) => Homepage()));
-                    // }
                   },
                   child: Center(
                     child: Text(

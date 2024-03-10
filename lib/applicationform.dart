@@ -2,13 +2,11 @@ import 'dart:io';
 import 'package:final_project/commonurl.dart';
 import 'package:final_project/homepage.dart';
 import 'package:http/http.dart' as http;
-import 'package:final_project/viewjobs.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:developer';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:placement/viewjobs.dart';
 
 class JobApllyForm extends StatefulWidget {
   String? jobid, companyid;
@@ -48,17 +46,7 @@ class _JobApllyFormState extends State<JobApllyForm> {
         log("pickedfile=====" + pickedFile.toString());
       });
     }
-    // else {
-    //   // User canceled the picker
-    // }
   }
-  // void initial() async {
-  //   sharedPreferences = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     username = sharedPreferences.getString('username')!;
-  //     log('username:::::::$username');
-  //   });
-  // }
 
   Future<Map<String, dynamic>> updateProfile(
       String username,
@@ -69,7 +57,7 @@ class _JobApllyFormState extends State<JobApllyForm> {
       File? imagefile,
       String companyid) async {
     log("calleed");
-    // Map<String, dynamic> result;
+
     var res;
     var request = http.MultipartRequest(
         "POST", Uri.parse('${CommonUrl().mainurl}uploadpdf'));
@@ -226,7 +214,6 @@ class _JobApllyFormState extends State<JobApllyForm> {
                   ElevatedButton.icon(
                       onPressed: () {
                         setState(() {
-                          //pdfReady = false;
                           pickedFile = null;
                           _pickFile();
                         });
@@ -260,9 +247,7 @@ class _JobApllyFormState extends State<JobApllyForm> {
               child: ElevatedButton(
                 onPressed: () async {
                   DateTime today = DateTime.now();
-                  dateStr =
-                      //"${today.day}-${today.month}-${today.year}";
-                      "${today.year}-${today.month}-${today.day}";
+                  dateStr = "${today.year}-${today.month}-${today.day}";
 
                   print(dateStr);
 
@@ -278,19 +263,17 @@ class _JobApllyFormState extends State<JobApllyForm> {
                           addressController.text,
                           pickedFile,
                           widget.companyid!);
-                    }else{
-                    final snackBar = SnackBar(
-                      content: Text(
-                        "Select CV !!",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    );
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text(
+                          "Select CV !!",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
 
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }}
-
-                  // Navigator.pushReplacement(context,
-                  //     MaterialPageRoute(builder: (context) => viewjobs()));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple[200],
